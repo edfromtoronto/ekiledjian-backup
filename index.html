@@ -24,6 +24,333 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2025/10/16/helium-browser-privacycentred-chromium-without.html">Helium Browser: privacy-centred Chromium, without the extras</a></h1>
+		
+
+		<a href="https://kiledjian.com/2025/10/16/helium-browser-privacycentred-chromium-without.html" class="u-url"><time class="dt-published" datetime="2025-10-16 11:46:43 -0400">Oct 16, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Helium is a new, open-source Chromium browser that ships with strong privacy defaults and a lean interface. It removes Google services, blocks trackers and third-party cookies by default, and avoids built-in sync and password vaults to keep the attack surface small. For security-minded users, it offers a disciplined starting point with fewer emissions out of the box.</p>
+<h2 id="what-it-is">What it is</h2>
+<p>Helium is a desktop-only browser for Windows, macOS and Linux. It builds on ungoogled-chromium and adds opinionated privacy presets, uBlock Origin, a compact UI, split-view browsing and native “bangs” that resolve locally. The goal is straightforward: keep Chromium compatibility and performance while stripping telemetry and bloat.</p>
+<h2 id="who-runs-it-and-when-it-surfaced">Who runs it and when it surfaced</h2>
+<p>Helium is maintained in the open by the “imput” team under the GitHub organisation <strong>imputnet</strong>. The legal entity is imput LLC (Wyoming). Public activity and broad community discussion began in late September 2025. The project is actively updated and currently labelled beta.</p>
+<h2 id="operating-model-and-governance">Operating model and governance</h2>
+<ul>
+<li><strong>Open source:</strong> Code is published across multiple repositories. Browser code is primarily GPL-3.0; upstream Chromium components remain under BSD-3-Clause; associated network services are open and self-hostable.</li>
+<li><strong>No ads or crypto:</strong> There is no ad platform, token or affiliate allow-listing. Donations and infrastructure sponsorships support builds (for example, CI runners).</li>
+<li><strong>Stance on data:</strong> No first-run network calls and no browser telemetry. The design avoids bundled sync and an embedded password manager by choice.</li>
+</ul>
+<h2 id="platforms-and-updates">Platforms and updates</h2>
+<ul>
+<li><strong>macOS:</strong> Signed builds with automatic updates.</li>
+<li><strong>Windows:</strong> Installer available; the Windows repository indicates <strong>no automatic updates yet</strong>.</li>
+<li><strong>Linux:</strong> AppImage and tarball releases; community packaging exists. Update paths vary by distribution.</li>
+<li><strong>DRM:</strong> Widevine is not bundled. Premium streaming services may not work unless you add DRM components manually, which is not officially supported.</li>
+<li><strong>Cadence:</strong> Rapid point releases that follow upstream Chromium security patches.</li>
+</ul>
+<h2 id="security-architecture-and-defaults">Security architecture and defaults</h2>
+<ul>
+<li><strong>Content controls:</strong> uBlock Origin is pre-installed; community lists are enabled; third-party cookies are blocked by default.</li>
+<li><strong>HTTPS and credentials:</strong> HTTPS enforcement with warnings on downgrade. Passkeys are supported. There is no built-in password manager; bring your own.</li>
+<li><strong>Extensions:</strong> Manifest V3 is supported; Manifest V2 is supported “as long as possible.” Extension installs from the Chrome Web Store are anonymised through Helium Services; those services are open source and can be self-hosted.</li>
+<li><strong>Surface reduction:</strong> No bundled VPN, wallet, news feed or rewards scheme.</li>
+</ul>
+<h2 id="privacy-posture-services-and-operations">Privacy posture (services and operations)</h2>
+<ul>
+<li><strong>Local by default:</strong> Browsing data stays on the device unless you choose otherwise.</li>
+<li><strong>Helium Services:</strong> The optional services used for features like anonymising Web Store requests communicate over TLS 1.3, run in virtual machines with full-disk encryption, and keep operational logs for a short retention window. Update distribution leverages a mainstream CDN. These components are open for review and self-hosting.</li>
+<li><strong>Trade-off to watch:</strong> Proxying Web Store requests reduces exposure to Google infrastructure but introduces a small trust surface around Helium’s service design and operations.</li>
+</ul>
+<h2 id="community-signals-balanced">Community signals (balanced)</h2>
+<ul>
+<li><strong>Positives:</strong> Fast and responsive feel, compact chrome, sensible defaults that require little hardening.</li>
+<li><strong>Concerns:</strong> Youth of the project (beta), no Windows auto-update yet, no DRM, and the usual Chromium-monoculture questions. Some security reviewers have called out the Web Store proxy as an area to monitor.</li>
+</ul>
+<h2 id="practical-guidance-for-security-conscious-users">Practical guidance for security-conscious users</h2>
+<ul>
+<li><strong>Fit and scope:</strong> A credible privacy-centred daily driver for individuals who do not rely on DRM-gated media or built-in sync. Pilot first before standardising.</li>
+<li><strong>Credential strategy:</strong> Use an audited password manager and prefer passkeys where supported.</li>
+<li><strong>Extension governance:</strong> Keep the set small; review permissions and maintainer history; favour well-maintained open-source extensions.</li>
+<li><strong>Update hygiene:</strong> On Windows and many Linux setups, schedule regular manual update checks until automatic channels reach parity.</li>
+</ul>
+<h2 id="bottom-line">Bottom line</h2>
+<p>Helium’s value proposition is restraint: strong defaults, less noise and fewer implicit data flows. It is not the conservative enterprise default today, but it is worth a controlled pilot for teams that prioritise privacy and operational simplicity. Pair it with disciplined updates, a strict extension policy and an external credential manager.</p>
+<h2 id="disclosure">Disclosure</h2>
+<p>This article represents my personal views and analysis. It does not reflect the opinions, positions or policies of my employer or any other organization or individual. The content is provided for general informational purposes only and does not constitute legal, security, compliance or investment advice. All information is based on publicly available sources verified as of the publication date. No compensation, product access or consideration was provided by Helium or any affiliated entity. Features, privacy practices and technical details may change without notice, and readers are encouraged to confirm current information directly with the project. Neither the author nor the publisher accepts responsibility for any loss or outcome resulting from the use of this material.</p>
+<p>#HeliumBrowser #PrivacyBrowser #SecureBrowsing #CyberSecurity #DataPrivacy #ChromiumFork #OpenSourceBrowser #PrivacyFirst #TrackerBlocking #AdFreeBrowsing #UngoogledChromium #HTTPSEverywhere #NoTelemetry #PrivacyTech #SecurityTools #OnlinePrivacy #DigitalSafety #PrivacySoftware #PrivacyMatters #TechPrivacy #MinimalistBrowser #BrowserSecurity #PrivacyByDesign #DataProtection #MacOSBrowser #WindowsBrowser #LinuxBrowser #PrivacyInnovation #PrivateWeb #NoAds #UserControl #PrivacyFocus #SecureWeb #TechEthics #CISOTools</p>
+<img src="uploads/2025/chatgpt-image-oct-16-2025-11-42-12-am.png" width="600" height="400" alt="">
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://kiledjian.com/2025/10/15/archivetoday-inside-the-web-archiving.html">Archive.today: inside the web archiving service</a></h1>
+		
+
+		<a href="https://kiledjian.com/2025/10/15/archivetoday-inside-the-web-archiving.html" class="u-url"><time class="dt-published" datetime="2025-10-15 17:00:26 -0400">Oct 15, 2025</time></a>
+
+		<div class="e-content">
+			 <p>When a web page disappears from the internet—deleted by its author, censored by a government or simply lost to time—one service has made it its mission to preserve those digital artefacts permanently. That service is archive.today, and its story reveals as much about the tensions of the modern internet as it does about the fragility of online information.</p>
+<h2 id="what-is-archivetoday">What is archive.today?</h2>
+<p>Archive.today (formerly known as archive.is) is an on-demand web archiving service that saves snapshots of web pages. Founded on May 16, 2012, the service captures websites exactly as they appear at a specific moment, preserving them permanently for future reference. Unlike automated crawlers that continuously scan the web, archive.today creates archives only when users explicitly request them.</p>
+<p>The service captures two versions of each archived page: a functional web page with live, clickable links and a static screenshot image. By 2021, archive.today had archived about 500 million pages, storing roughly 700 terabytes of data.</p>
+<h2 id="technical-capabilities">Technical capabilities</h2>
+<p>Archive.today excels at archiving JavaScript-heavy sites that other services struggle with, including Google Maps, X (formerly Twitter) and other dynamic Web 2.0 applications. The service supports pages containing hash-bang fragments (#!), which were once common on single-page applications.</p>
+<p>The maximum page size that can be archived is 50 megabytes, including images. Archive.today captures text and images but excludes videos (except from certain sites such as X), XML files, RTF documents, spreadsheets and other non-static content. Pages are captured at a fixed browser width of 1,024 pixels.</p>
+<p>The service converts external CSS to inline styling and removes responsive design elements. JavaScript-generated content appears in a frozen state. Since Nov. 29, 2019, archive.today has used Chromium (non-headless) for scraping, replacing the previous PhantomJS engine.</p>
+<h2 id="the-many-domains-of-archivetoday">The many domains of archive.today</h2>
+<p>One of archive.today’s most notable features is its use of multiple domain names, primarily to circumvent censorship and internet service provider blocks. The service is accessible through numerous top-level domains:</p>
+<ul>
+<li>archive.today (the primary gateway)</li>
+<li>archive.is (the original name, deprecated since 2019)</li>
+<li>archive.ph</li>
+<li>archive.md</li>
+<li>archive.li</li>
+<li>archive.fo</li>
+<li>archive.vn</li>
+</ul>
+<p>The service also operates a Tor hidden service (onion address) for users requiring maximum privacy and censorship resistance: <code>archiveiya74codqgiixo33q62qlrqtkgmcitqx5u2oeqnmn5bpcbiyd.onion</code></p>
+<p>In January 2019, the operator announced via Twitter: “Please do not use archive.IS mirror for linking, use others mirrors [.TODAY .FO .LI .VN .MD .PH]. .IS might stop working soon.”</p>
+<p>The archive.today domain serves as a gateway that automatically redirects users to one of the other domains based on load balancing and availability. The operator has requested that users always link to archive.today rather than specific mirrors, as this allows flexibility in redirecting traffic as needed.</p>
+<h2 id="the-founders-identity">The founder’s identity</h2>
+<p>The identity of archive.today’s creator remains unconfirmed. The domain archive.is was registered in May 2012 to “Denis Petrov” of Prague, Czech Republic. However, Denis Petrov is a common Russian name, and this may be a pseudonym.</p>
+<p>The same contact information was used to register several questionable domains, including carding forums and piracy sites (all of which have since disappeared), many containing German keywords, suggesting a possible connection to German-speaking regions.</p>
+<p>Investigative work by online sleuths has linked the service to an account called “Masha Rabinovich,” who claimed ownership of archive.is in a 2012 forum post. The LinkedIn profile associated with archive.today’s early operations showed a profile picture linked to a “Masha Rabinovich” in Berlin. “Masha” is a Russian diminutive of Maria (or can be a Hebrew form of Moses), and Rabinovich is an Ashkenazi Jewish surname.</p>
+<p>Early GitHub captures on archive.today were linked to an account called “volth,” a fluent Russian speaker who contributed to NixOS (which archive.today uses). This account has since been completely deleted.</p>
+<p>The service’s FAQ, unchanged since 2013, states that the operation is located in Europe and requests PayPal donations in euros. Based on the operator’s Tumblr blog, the operator’s English is excellent but shows occasional noun capitalization suggesting a German background. However, the operator also answers questions in Russian on the blog.</p>
+<p>A 2023 investigative article concluded: “We have a pretty good idea of how the site is run: it’s a one-person labour of love, operated by a Russian of considerable talent and access to Europe.”</p>
+<h2 id="funding-model">Funding model</h2>
+<p>The funding of archive.today remains opaque and has been a source of uncertainty throughout its existence. According to the operator’s FAQ, the site is “privately funded” with “no complex finances behind it.”</p>
+<p>In October 2016, the site began accepting donations after previously refusing them (redirecting donation attempts to an animal shelter). A weekly crowdfunding target of $800 was set to maintain the site.</p>
+<p>According to comments on the operator’s blog, as of 2021, advertisements and donations covered less than 20 per cent of operating expenses. Donations in 2021 totalled approximately €6,000, though another comment from 2017 mentioned receiving “more than $1.50 every day, enough for a bowl of phở.” Another comment suggested that on good days, advertisements “almost cover expenses,” creating some inconsistency in the available information.</p>
+<p>Operating costs have escalated significantly:</p>
+<ul>
+<li>In 2012: approximately €300 per month</li>
+<li>In 2014: €2,000 per month</li>
+<li>In 2016: $4,000 per month</li>
+<li>In 2021: estimated costs for hosting 500 million pages (about 700 terabytes of data)</li>
+</ul>
+<p>PayPal donations were discontinued around 2022 because the operator could no longer top up the account, implying they are located in Russia and subject to financial restrictions. The operator has complained about the difficulty of making cross-border payments “across the Iron Curtain.”</p>
+<p>Current donation methods include Liberapay (a French non-profit) and BuyMeACoffee. Notably, cryptocurrency donations are not supported—the creator has expressed skepticism about crypto payments.</p>
+<p>Advertisements appear on archived pages when accessed via mobile devices (but not desktop). Yahoo network ads have been injected into mobile views, though the exact revenue is unclear. The operator noted in 2021 that ads were a “test run” that would likely not stay permanently.</p>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>According to earlier statements from the operator, the service runs on Apache Hadoop and Apache Accumulo, with all data stored on HDFS (Hadoop Distributed File System). Textual content is reportedly replicated three times across servers in two data centres, while images are duplicated twice. Both data centres are stated to be located in Europe, with OVH hosting confirmed for at least one location.</p>
+<p>Archive.today faced a significant infrastructure challenge on March 10, 2021, when a major fire destroyed OVH’s SBG2 data centre in Strasbourg, France, and damaged the adjacent SBG1 facility. The fire broke out shortly after midnight (reported as 12:47 a.m.) and completely destroyed the five-storey SBG2 building. The incident caused widespread outages for OVH’s customers and likely impacted archive.today’s operations, though the service’s use of multiple data centres and redundancy helped ensure data preservation.</p>
+<p>As of February 2021, with 500 million archived pages, the service was estimated to manage approximately 700 terabytes of data. For comparison, the Internet Archive manages over 100,000 terabytes.</p>
+<p>The scraping operation uses automated browsers running through a botnet that cycles through numerous IP addresses to avoid detection and blocking by websites. The creator has openly acknowledged that computing power for running these browsers is now the main bottleneck for expanding the service.</p>
+<h2 id="why-archivetoday-exists-purpose-and-use-cases">Why archive.today exists: purpose and use cases</h2>
+<p>Archive.today fills several important niches in web archiving.</p>
+<h3 id="bypassing-robotstxt">Bypassing robots.txt</h3>
+<p>Unlike many archiving services, archive.today does not respect robots.txt exclusion files. The service justifies this by stating it acts “as a direct agent of the human user” rather than as a search engine crawler. This policy ensures that once a page is archived, it cannot be removed by the website owner changing their robots.txt file, which has been a source of frustration with other archives such as the Wayback Machine.</p>
+<h3 id="preserving-dynamic-content">Preserving dynamic content</h3>
+<p>Archive.today excels at capturing JavaScript-heavy sites that automated crawlers often miss or render incorrectly. This makes it particularly useful for archiving social media posts, interactive maps and modern web applications.</p>
+<h3 id="paywall-circumvention">Paywall circumvention</h3>
+<p>One controversial but widely used feature is archive.today’s ability to bypass paywalls on news sites. When a user archives a paywalled article, the service can often capture the full content. This has made it popular among journalists, researchers and general readers who cannot afford multiple subscriptions. However, this raises legal and ethical questions about copyright and publisher revenue.</p>
+<p>The service achieves this through various means, including using dedicated login accounts (which the operator solicits from users) for platforms such as Instagram, X, GitHub and Reddit. Publishers have struggled to block the service because it cycles through multiple IP addresses.</p>
+<h3 id="preventing-content-disappearance">Preventing content disappearance</h3>
+<p>Unlike the Wayback Machine, which can remove content retroactively at a website owner’s request, archive.today has a strict no-deletion policy. Once archived, content remains permanently, with limited exceptions for law enforcement, child exploitation material and Digital Millennium Copyright Act (DMCA) requests processed through the operator’s blog.</p>
+<p>This permanence makes the service valuable for:</p>
+<ul>
+<li>Journalists preserving evidence and sources</li>
+<li>Researchers tracking changes in web content over time</li>
+<li>Legal professionals documenting online evidence</li>
+<li>Individuals preserving content that may be altered or removed</li>
+</ul>
+<h2 id="notable-controversies-and-challenges">Notable controversies and challenges</h2>
+<h3 id="the-cloudflare-dns-conflict">The Cloudflare DNS conflict</h3>
+<p>Since May 2018, archive.today has been largely inaccessible to users of Cloudflare’s 1.1.1.1 Domain Name System (DNS) service. This ongoing technical dispute centres on Extension Mechanisms for DNS (EDNS) Client Subnet (ECS) information.</p>
+<p>Archive.today’s DNS servers return invalid responses to queries from Cloudflare because Cloudflare does not include EDNS Client Subnet information in its DNS requests. ECS leaks geolocation data about users, which Cloudflare considers a privacy risk and refuses to implement.</p>
+<p>The archive.today operator argues that the absence of EDNS information causes “so many troubles” for load balancing and DDoS protection, particularly because DNS requests and subsequent HTTP requests come from vastly different geographic locations when routed through Cloudflare’s global network.</p>
+<p>Cloudflare chief executive Matthew Prince explained that fixing this on their end “would violate the integrity of DNS and the privacy and security promises we made to our users.” He noted that nation-state actors have been observed monitoring EDNS subnet information to track individuals.</p>
+<p>This conflict has been intermittent, with temporary resolutions followed by renewed blocking. As of October 2025, the issue remains unresolved, forcing users to either switch DNS providers or use VPNs to access archive.today.</p>
+<h3 id="censorship-and-blocking">Censorship and blocking</h3>
+<p>Archive.today has faced numerous censorship attempts worldwide:</p>
+<p><strong>China</strong>: According to GreatFire.org, archive.today has been blocked since March 2016, archive.li since September 2017, archive.fo since July 2018, and archive.ph since December 2019.</p>
+<p><strong>Russia</strong>: In 2016, Roskomnadzor began blocking access to archive.is. In Russia, only HTTP access is possible; HTTPS connections are blocked. On Jan. 28, 2016, pages related to the annexation of Crimea were specifically blocked when accessed through non-encrypted traffic.</p>
+<p><strong>Finland</strong>: On July 21, 2015, the operators blocked access from all Finnish IP addresses, stating on Twitter they did this “to avoid escalating a dispute they allegedly had with the Finnish government.” Access has since been restored.</p>
+<p><strong>Australia and New Zealand</strong>: In March 2019, several internet providers blocked the site for six months following the Christchurch mosque shootings, attempting to limit distribution of footage from the attack. The blocks have since been lifted.</p>
+<h3 id="reliability-challenges">Reliability challenges</h3>
+<p>Users have reported persistent technical problems with archive.today, particularly since 2023. Common complaints include:</p>
+<ul>
+<li>DNS resolution errors affecting various providers beyond Cloudflare</li>
+<li>Infinite captcha loops that prevent access</li>
+<li>Extended outages lasting days or weeks</li>
+<li>Conflicts with virtual private network (VPN) services and antivirus software</li>
+<li>Slow page loading times</li>
+</ul>
+<p>The operator’s Tumblr blog, which previously provided updates and support, has not been updated for more than a year as of late 2024, leaving users without official communication during outages.</p>
+<h3 id="legal-and-ethical-concerns">Legal and ethical concerns</h3>
+<p>The service’s ability to archive paywalled content and refusal to respect robots.txt or removal requests has drawn criticism from publishers and copyright advocates. However, the operator’s anonymity and the service’s location in Europe (potentially Russia) have made legal action difficult.</p>
+<p>The service has also been used to preserve controversial or extremist content, leading to some of the censorship attempts mentioned above. However, the operator maintains a hands-off approach except for child exploitation material and valid legal requests.</p>
+<h2 id="technical-features">Technical features</h2>
+<h3 id="search-functionality">Search functionality</h3>
+<p>Archive.today’s search is powered by Google Custom Search. If no results are found, the service falls back to Yandex Search. Users can search archived pages by URL, domain or keywords.</p>
+<p>The search toolbar supports advanced operators:</p>
+<ul>
+<li>Asterisk (*) as a wildcard character</li>
+<li>Quotation marks for exact phrase matching</li>
+<li>“insite:” operator to restrict searches to specific domains</li>
+</ul>
+<h3 id="text-highlighting">Text highlighting</h3>
+<p>When users select text on an archived page, JavaScript generates a URL fragment that automatically highlights that text when the link is shared and visited again.</p>
+<h3 id="zip-downloads">ZIP downloads</h3>
+<p>Users can download archived pages as ZIP files, though this feature was disabled for pages archived after Nov. 29, 2019, when the service switched to the Chromium browser engine.</p>
+<h3 id="memento-api">Memento API</h3>
+<p>Since July 2013, archive.today has supported the Memento Project application programming interface (API), allowing programmatic access to archived content.</p>
+<h2 id="current-status-and-future-uncertainty">Current status and future uncertainty</h2>
+<p>As of October 2025, archive.today remains operational despite ongoing challenges. The service operates in a state of perpetual uncertainty as a one-person operation with opaque funding and potential connections to Russia. The service faces several existential threats:</p>
+<ol>
+<li><strong>Financial sustainability</strong>: The operator admits that personal funds cover the majority of operating costs, which continue to grow as the archive expands.</li>
+<li><strong>Technical challenges</strong>: The service experiences frequent domain issues, averaging “one trouble with domains per year and each fifth trouble will result in domain loss.” Recent reliability problems have frustrated users who depend on the service.</li>
+<li><strong>Legal pressure</strong>: While the operator has largely avoided legal action through anonymity, this could change if jurisdictions become more aggressive in pursuing copyright or content violations.</li>
+<li><strong>Political pressure</strong>: With suspected Russian connections and increasing sanctions, cross-border payments and international operations become more difficult.</li>
+<li><strong>Single point of failure</strong>: As the creator acknowledges, “My death can cause interruption of service.” There is no succession plan or organizational structure to ensure continuity.</li>
+</ol>
+<p>The operator has described the service as a “weak tool” that is “doomed to die,” showing a realistic awareness of its fragility. However, it has persisted for more than a decade since 2012, demonstrating remarkable resilience despite numerous challenges.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Archive.today occupies a unique and controversial niche in web archiving. It provides a valuable service for preserving ephemeral online content, particularly for journalists, researchers and users in censored regions. Its ability to bypass paywalls and robots.txt restrictions makes it both powerful and contentious.</p>
+<p>The mysterious nature of its operation—with an anonymous Russian operator funding it primarily out of pocket—raises questions about long-term sustainability and motivations. Yet this same anonymity has protected it from legal pressure that might have shut it down years ago.</p>
+<p>As the web becomes increasingly paywalled, dynamic and censored, services such as archive.today play an important role in preserving the public record. Whether it continues to operate for another decade or disappears tomorrow, it has already archived half a billion pages and demonstrated the ongoing tension between copyright, censorship, preservation and access to information.</p>
+<p>For users who depend on the service, the recommendation is clear: archive important content across multiple services (including the Internet Archive and local copies) to hedge against the risk of archive.today’s eventual disappearance—or its next extended outage.</p>
+<hr>
+<h2 id="about-this-post">About this post</h2>
+<p><strong>Sources and verification</strong>: This article is based on publicly available information as of October 2025, including Wikipedia articles, investigative journalism, technical documentation, user forums and the operator’s own blog posts. All factual claims have been verified against multiple independent sources where possible.</p>
+<p><strong>Operator anonymity</strong>: The identity of archive.today’s operator remains unconfirmed. All names mentioned (Denis Petrov, Masha Rabinovich) may be pseudonyms. The operator maintains anonymity and has not been independently verified by journalists or researchers.</p>
+<p><strong>Self-reported information</strong>: Details about funding, infrastructure and operational costs come primarily from the anonymous operator’s own statements on their FAQ and Tumblr blog. These claims cannot be independently verified and should be evaluated with appropriate skepticism.</p>
+<p><strong>Service volatility</strong>: Archive.today operates as an unofficial, privately run service with no institutional backing, legal guarantees or service-level agreements. The service experiences frequent technical issues and may become unavailable or cease operations at any time without notice.</p>
+<p><strong>Legal considerations</strong>: Using archive.today to bypass paywalls or archive copyrighted content may violate copyright law, terms of service or other legal restrictions in your jurisdiction. This article describes the service’s capabilities but does not constitute legal advice or endorsement of any particular use.</p>
+<p><strong>Editorial independence</strong>: This article is not affiliated with, endorsed by or sponsored by archive.today or its operator. It is an independent analysis intended for educational and informational purposes.</p>
+<p>#archiveToday #webarchiving #digitalpreservation #internetarchives #infosec #privacy #opendata #cloudflare #dns #edns #ecs #russia #censorship #internetfreedom #opensource #waybackmachine #journalism #researchtools #legaltech #cybersecurity #datastorage #ovh #hadoop #chromium #webinfrastructure #paywalls #copyright #freespeech #tor #darkweb #onionservices #infotech #digitalethics #compliance #opentech #webhistory</p>
+<img src="uploads/2025/99c4eade5f.png" width="600" height="400" alt="">
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://kiledjian.com/2025/10/14/built-to-fail-the-structural.html">Built to fail: the structural indicators that doom CISOs</a></h1>
+		
+
+		<a href="https://kiledjian.com/2025/10/14/built-to-fail-the-structural.html" class="u-url"><time class="dt-published" datetime="2025-10-14 09:37:13 -0400">Oct 14, 2025</time></a>
+
+		<div class="e-content">
+			 <p>If nearly a quarter of Fortune 500 chief information security officers last just one year in the role, we need to stop asking what’s wrong with CISOs—and start asking what’s wrong with how we set them up.</p>
+<p>The narrative around CISO failure follows a familiar pattern: breach happens, heads roll, organisation brings in a “better” security leader. Rinse and repeat. But when 24 per cent of Fortune 500 CISOs have been in their current position for an average of just one year—with overall average tenure of 26 months, according to Cybersecurity Ventures’ 2020 Fortune 500 CISO analysis—compared to 4.9 years for other C-suite executives, <strong>the problem isn’t the talent pool. It’s the fishbowl.</strong></p>
+<p>After analysing dozens of recent research studies from leading firms, a clear pattern emerges: most “failing” CISOs aren’t failing. They’re being structurally failed by their organisations long before they arrive.</p>
+<h2 id="the-credibility-paradox-authority-without-power">The credibility paradox: authority without power</h2>
+<p>Consider a composite scenario reflecting common patterns: Sarah <strong>REDACTED</strong> lasted 11 months as CISO at a mid-sized financial services firm. She identified critical vulnerabilities, presented remediation plans to the board and watched her recommendations get tabled—twice. When a breach inevitably occurred, she was out within weeks.</p>
+<p>Her mistake wasn’t technical. It was accepting a role where she had responsibility without authority.</p>
+<p><strong>Seventy-nine per cent of CISOs report feeling boardroom pressure to downplay the severity of cyber risks,</strong> according to Trend Micro’s 2024 CISO Credibility Gap research. One-third say cybersecurity is still treated as part of IT rather than business risk.</p>
+<p>This is the credibility paradox in action. Boards hire CISOs to manage existential risk, then treat them as technical support staff reporting to the CIO.</p>
+<p>Gartner’s 2024 Board of Directors Survey shows that 84 per cent of directors classify cybersecurity as a business risk. Meanwhile, other research indicates a persistent literacy gap at the board level, creating a governance blind spot.</p>
+<p>The warning signs are structural:</p>
+<p><strong>Reporting structure matters.</strong> When a CISO reports to the CIO, they face an inherent conflict of interest. The CIO is typically measured on speed, innovation and uptime—delivering projects on time and keeping systems running. The CISO’s mandate often requires slowing down deployments, adding security controls and occasionally saying no. When forced to choose between project deadlines and security requirements, even well-intentioned CIOs face impossible trade-offs.</p>
+<p><strong>Regulators are taking notice.</strong> In Canada, OSFI’s Guideline B-13 on technology and cyber risk management expects roles like the CISO to have <em>“appropriate stature and visibility”</em> within federally regulated financial institutions—an explicit cue that buried reporting structures undermine effective oversight.</p>
+<p><strong>Board access predicts satisfaction.</strong> IANS Research found that CISO satisfaction with leadership’s handling of security budget requests drops dramatically without regular board engagement: just 28 per cent of those without board contact are satisfied versus 57 per cent with at least infrequent interaction.</p>
+<p><strong>It’s like hiring a fire chief, ignoring their warnings about faulty wiring, then blaming them when the building burns down.</strong></p>
+<h2 id="the-resource-mismatch">The resource mismatch</h2>
+<p>Here’s the pattern that predicts CISO failure with frightening accuracy: growing security mandates paired with shrinking (or lagging) budgets.</p>
+<p>Team8’s 2025 CISO Village Survey shows that 52 per cent of CISOs report a budget increase in 2025—down from 70 per cent in 2024. Meanwhile, the attack surface expands, AI-enabled threats accelerate and regulatory requirements intensify.</p>
+<p>The data is damning. Only 29 per cent of CISOs report having proper budget for cybersecurity initiatives, Splunk’s 2025 CISO Report indicates. More critically: 62 per cent said postponing an upgrade due to budget cuts led to a successful attack.</p>
+<p>Every department head argues for more budget—marketing, R&amp;D, operations. But cybersecurity budget requests are fundamentally different. Unlike a marketing campaign with measurable ROI or a product launch with revenue projections, security spending prevents catastrophic loss. <strong>It’s insurance, not a growth investment. The CISO’s success is often invisible—a breach that didn’t happen.</strong></p>
+<p>IBM’s <em>Cost of a Data Breach Report 2024</em> found that the average breach costs USD $4.88 million—<strong>up 10 per cent year over year</strong> (and up from $3.86 million in 2020). Yet organisations consistently underinvest in prevention while absorbing massive costs after incidents.</p>
+<p><strong>The test is simple:</strong> has your security budget grown proportionally to your attack surface? Can your CISO articulate which risks are being accepted due to resource constraints—and has leadership formally acknowledged those decisions?</p>
+<p>If not, you’re not setting your CISO up for success. You’re setting them up as a future scapegoat.</p>
+<h2 id="the-culture-cascade">The culture cascade</h2>
+<p>In 2019, Capital One experienced a massive data breach affecting over 100 million customers. Post-breach reporting revealed something more troubling than the technical vulnerability: employees had raised concerns about high turnover in the cybersecurity unit, with about one-third leaving in 2018 alone.</p>
+<p>The breach wasn’t just a technical failure. It was a cultural collapse that manifested as a security incident.</p>
+<p>A 2024 survey reported by <em>InformationWeek</em> found that 66 per cent of cybersecurity professionals said their job was more stressful than five years ago. Earlier research covered by Help Net Security found that leaders were seeing rising turnover, with one in five security professionals considering leaving within six months—a durable warning signal.</p>
+<p>This isn’t normal attrition. This is a toxicity indicator.</p>
+<p>The warning signs are recognisable. When security is treated as a mere compliance requirement rather than fundamental risk management, it weakens overall resilience and leads to bare-minimum adherence.</p>
+<p><strong>Public shaming after security incidents creates a fear-based culture.</strong> If employees fear repercussions for mistakes, they’re less likely to report incidents or vulnerabilities, leading to unaddressed security gaps.</p>
+<p>The “zero-intrusions-allowed” mindset punishes defenders for uncovering problems rather than rewarding resilience. As Rob Lee, chief of research at SANS Institute, told <em>Dark Reading</em>: “Organisations with this mindset expect absolute perfection and blame security teams even when threats are successfully detected and mitigated.”</p>
+<p>The cascade effect is measurable. Between 2022 and 2023, CISO satisfaction fell by 10 points to 64 per cent, while those open to a job change rose to 75 per cent, according to IANS Research’s 2023–2024 benchmark report.</p>
+<p><strong>Your security team’s turnover rate is a leading indicator of impending CISO failure.</strong> If it exceeds 20 per cent annually, you don’t have a hiring problem—you have a culture problem.</p>
+<h2 id="the-boardciso-gap">The board–CISO gap</h2>
+<p>Picture this scene, repeated in boardrooms across North America: a CISO presents mean time to detect, vulnerability counts and patch compliance rates. Board members nod politely, then ask: “But are we secure?”</p>
+<p>It’s the wrong question, asked by people who don’t have the context to ask better ones.</p>
+<p>PwC research shows that 59 per cent of directors admit they struggle to understand cyber-risk drivers. This knowledge gap creates a dangerous dynamic: boards can’t effectively oversee what they don’t understand, yet they hold CISOs accountable when things go wrong.</p>
+<p><strong>The communication gap is a shared failing.</strong> CISOs must translate technical risks into business language—this is a fundamental executive responsibility. CFOs translate complex accounting standards for boards. General counsel translate legal risk. Security leaders must do the same.</p>
+<p>But effective oversight requires both a skilled translator and an educated audience. Splunk’s 2025 CISO Report found that among respondents who indicated a “very good” or “excellent” CISO-board relationship, 44 per cent of CISOs believed they were adequately communicating security-milestone progress, while only 29 per cent of board members believed the same.</p>
+<p>Even when CISOs think they’re communicating well, boards disagree. <strong>This suggests the problem isn’t just translation—it’s comprehension.</strong></p>
+<p>Boards have a fiduciary duty to develop sufficient literacy to govern one of the organisation’s most significant risks. Only 29 per cent of organisations report having at least one board member with cybersecurity expertise. Effective governance is a two-way street.</p>
+<h2 id="the-liability-trap">The liability trap</h2>
+<p>On Oct. 30, 2023, the U.S. Securities and Exchange Commission did something unprecedented: it charged a CISO individually—SolarWinds’ Timothy Brown—marking the first time the SEC had charged a cybersecurity executive directly.</p>
+<p>While a July 2024 court ruling dismissed most claims, the parties reached a preliminary settlement in July 2025, with a Sept. 12, 2025, deadline set for final paperwork pending SEC Commissioner approval.</p>
+<p>The shockwave is still reverberating through security leadership.</p>
+<p>More than half of private-company CISOs lack protections like directors and officers (D&amp;O) insurance or indemnification, according to Hitch Partners’ 2025 CISO Security Leadership Survey.</p>
+<p><strong>The issue isn’t accountability itself—holding executives personally accountable for their domains is good governance.</strong> The Sarbanes-Oxley Act did this for CFOs, improving financial transparency.</p>
+<p><strong>The problem is the dangerous imbalance.</strong> CISOs are being asked to accept CEO-level liability without CEO-level authority, resources or protections. This creates a trap where they’re held responsible for outcomes they don’t have the power to control.</p>
+<p>Court documents show that Brown had flagged the organisation’s security as “very vulnerable” shortly after joining, yet externally the company asserted it “placed a premium on the security of its products.”</p>
+<p>Splunk’s 2025 report found that one in five CISOs had been pressured not to report a compliance issue. When personal liability enters the equation, that pressure intensifies.</p>
+<h2 id="the-self-assessment-framework">The self-assessment framework</h2>
+<p>Rate your organisation honestly on these eight indicators:</p>
+<p><strong>1. Authority alignment</strong><br>
+Does your CISO have budget authority matching their responsibility?<br>
+<strong>Red flag:</strong> CISO must seek approval for every tool and hire</p>
+<p><strong>2. Access deficit</strong><br>
+How many organisational layers separate your CISO from the CEO?<br>
+<strong>Red flag:</strong> CISO reports to CIO/CTO who reports to CEO</p>
+<p><strong>3. Board engagement quality</strong><br>
+Quarterly strategic sessions or annual compliance check-ins?<br>
+<strong>Red flag:</strong> Board sees CISO only after incidents</p>
+<p><strong>4. Team stability</strong><br>
+Security team turnover rate versus company average?<br>
+<strong>Red flag:</strong> Turnover exceeds 20 per cent annually</p>
+<p><strong>5. Resource reality</strong><br>
+Has security budget grown proportionally to attack-surface expansion?<br>
+<strong>Red flag:</strong> Flat security budget while the organisation doubles in size</p>
+<p><strong>6. Communication effectiveness</strong><br>
+Can your board understand CISO reports without translation?<br>
+<strong>Red flag:</strong> Board asks “But are we secure?” after presentations</p>
+<p><strong>7. Culture indicators</strong><br>
+Can security team members report mistakes without fear?<br>
+<strong>Red flag:</strong> Security incidents followed by blame sessions</p>
+<p><strong>8. Liability protection</strong><br>
+Does your CISO have D&amp;O coverage or indemnification?<br>
+<strong>Red flag:</strong> No liability protection while facing personal legal risk</p>
+<p><strong>Scoring:</strong></p>
+<ul>
+<li>Zero to two red flags: your CISO has a fighting chance</li>
+<li>Three to four red flags: high risk of failure within 24 months</li>
+<li>Five or more red flags: you’re not retaining your next CISO</li>
+</ul>
+<h2 id="the-fixbefore-its-too-late">The fix—before it’s too late</h2>
+<p><strong>For boards</strong><br>
+Stop treating cybersecurity as a technical problem requiring a technical solution. Boards should already understand security as business-critical.<br>
+Invest in board education. If you can’t explain the difference between a vulnerability scan and a penetration test, you can’t effectively oversee security.<br>
+Create psychological safety for bad news. Trend Micro found that 79 per cent of CISOs feel pressure to downplay risks—that pressure comes from you.</p>
+<p><strong>For CEOs</strong><br>
+Recognise that CISO turnover is a leading indicator of organisational dysfunction, not individual failing. When 24 per cent of Fortune 500 CISOs last just one year, systemic issues are at play.<br>
+Make security a team sport. Build security into objectives and key results (OKRs) and key performance indicators (KPIs) across the organisation. When security aligns with individual success metrics, it stops being “extra work” and starts being core business.</p>
+<p><strong>For CISOs</strong><br>
+The structural issues outlined here don’t absolve security leaders of their responsibility to adapt and influence. The most effective CISOs recognise these headwinds and actively work to overcome them by becoming masterful translators of risk and skilled internal diplomats.<br>
+However, when structural flaws run too deep, even the most talented leader will fail. Ask these questions during the hiring process:</p>
+<ul>
+<li>Who does this role report to, and why?</li>
+<li>How often does the CISO present to the board, and what’s covered?</li>
+<li>What’s the security team’s turnover rate?</li>
+<li>What happened to the last person in this role?</li>
+<li>What budget authority comes with the position?</li>
+<li>What liability protections are provided?</li>
+</ul>
+<p>If the answers reveal structural problems, walk away. For CISOs already in structurally flawed roles, start reframing the conversation. Quantify accepted risks in financial terms and present the board with clear, business-aligned choices rather than technical warnings.<br>
+Life’s too short to take a job designed for failure.</p>
+<h2 id="the-real-measure-of-success">The real measure of success</h2>
+<p>The conversation about CISO failure needs reframing. A successful CISO isn’t one who prevents all breaches—that’s impossible. <strong>A successful CISO operates in an organisation that enables them to identify risks, communicate them effectively, secure resources to address them and maintain a resilient team.</strong></p>
+<p>The real question isn’t “Is our CISO good enough?” It’s “Have we created conditions where excellent CISOs can succeed?”</p>
+<p>SOCRadar’s 2024 analysis shows that the average tenure of a CISO is roughly 26 months—significantly lower than other C-suite roles. That’s not a CISO problem. That’s an organisational design problem.</p>
+<p>Before you hire your next CISO—or judge your current one—audit the structure first. Because if you’ve built a fishbowl where even the best fish suffocate, the problem isn’t the fish.</p>
+<p><strong>It’s time to fix the fishbowl.</strong></p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This publication is for general information only and does not constitute legal, compliance, financial or other professional advice. The views expressed are the author’s own and do not necessarily reflect those of any current or former employer, board, client or affiliate. Examples of individuals are composites unless expressly identified; any resemblance to real persons is coincidental. References to organisations, incidents, studies and statistics are drawn from publicly available sources believed to be reliable as of Oct. 14, 2025, but accuracy and completeness are not guaranteed. Nothing herein alleges misconduct by any specific individual or organisation. Do not act on this information without obtaining advice suited to your circumstances. If you believe any material is inaccurate, please contact the author to request a correction or removal.</p>
+<p>#CISO #Cybersecurity #InfoSec #CyberRisk #RiskManagement #GRC #BoardGovernance #CorporateGovernance #BoardEducation #SecurityLeadership #SecurityCulture #SecurityBudget #CyberResilience #IncidentResponse #BusinessContinuity #DataProtection #Privacy #Compliance #RegulatoryCompliance #OSFI #OSFIB13 #TechnologyRisk #AIThreats #Ransomware #ZeroTrust #IdentitySecurity #ThirdPartyRisk #SupplyChainSecurity #SecurityStrategy #EnterpriseSecurity #CanadianBusiness #FinancialServices #DandOInsurance #Liability #RiskOversight</p>
+<img src="uploads/2025/chatgpt-image-oct-14-2025-at-09-29-45-am.png" width="600" height="400" alt="">
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2025/10/07/prompting-strategies-to-reduce-ai.html">Prompting Strategies to Reduce AI Sycophancy</a></h1>
 		
 
@@ -99,7 +426,7 @@ Date of Incident (ET): Oct. 3, 2025<br>
 Date of Disclosure/Publication (ET): Oct. 4, 2025<br>
 GreyNoise observed a nearly 500 per cent spike in unique IPs probing Palo Alto Networks portals, likely preceding password-spraying or credential-stuffing attempts.<br>
 Source: <a href="https://www.bleepingcomputer.com/news/security/massive-surge-in-scans-targeting-palo-alto-networks-login-portals/">www.bleepingcomputer.com/news/secu&hellip;</a></p>
-<img src="uploads/2025/chatgpt-image-sep-22-2025-12-11-31-pm.png" width="600" height="400" alt="">
+<img src="https://cdn.uploads.micro.blog/255457/2025/chatgpt-image-sep-22-2025-12-11-31-pm.png" width="600" height="400" alt="">
 		</div>
 	  </div>
 	
@@ -139,7 +466,7 @@ Source: <a href="https://www.bleepingcomputer.com/news/security/massive-surge-in
 <li>OpenAI. <em>Sycophancy in GPT-4o: what happened and what we’re doing about it.</em> Apr. 29, 2025.</li>
 </ol>
 <p>Keyworkds: #AISycophancy #Cybersecurity #Privacy #AIResearch #ResponsibleAI #AIEthics #AIBehaviour #AIEvaluation #LLMs #SycophanticAI #StanfordResearch #CarnegieMellon #OxfordUniversity #ELEPHANTStudy #ProsocialAI #RLHF #OpenAI #GPT4o #AIEducation #AIAwareness #TrustAndSafety #Bias #HumanInTheLoop #DataProtection #IncidentResponse #RiskManagement #PrivacyTools #CyberTools #SecurityOperations #AIinSecurity #AIinPrivacy #DigitalTrust #FactChecking #CriticalThinking #AIOutput</p>
-<img src="uploads/2025/chatgpt-image-oct-6-2025-at-07-31-15-am.png">
+<img src="https://cdn.uploads.micro.blog/255457/2025/chatgpt-image-oct-6-2025-at-07-31-15-am.png">
 		</div>
 	  </div>
 	
@@ -179,7 +506,7 @@ Source: <a href="https://www.bleepingcomputer.com/news/security/massive-surge-in
 <p>Agentic AI is changing both the threat surface and the control plane. Treat agents as powerful automation: constrain their blast radius, test their behaviour continuously and govern them with the same rigour applied to any safety-critical system. The organisations that will benefit are those that pair measured autonomy with measured assurance — and test both relentlessly.</p>
 <p>Keywords : Hashtags:
 #CyberSecurity #AgenticAI #AIThreats #AITactics #CyberDefense #ThreatIntelligence #Deepfakes #Ransomware #AIGovernance #AIRegulation #ZeroTrust #RedTeam #BlueTeam #AIAttacks #MachineLearning #SecurityStrategy #InformationSecurity #CISO #CyberRisk #SOC #VulnerabilityManagement #EthicalAI #AIEthics #AIAssurance #CyberThreats #AdaptiveSecurity #SecurityLeadership #Infosec #DataSecurity #Malware #AutonomousAgents #AIinSecurity #CyberResilience #CISOStrategy #AIFuture</p>
-<img src="uploads/2025/image.png" width="600" height="400" alt="">
+<img src="https://cdn.uploads.micro.blog/255457/2025/image.png" width="600" height="400" alt="">
 		</div>
 	  </div>
 	
@@ -227,7 +554,7 @@ Source: <a href="https://www.bleepingcomputer.com/news/security/massive-surge-in
 <h2 id="bottom-line">Bottom line</h2>
 <p>On iOS and iPadOS, users can choose among many browsers, but—outside the EU (and Japan from late 2025)—they cannot choose among browser <strong>engines</strong>. iOS 26 raises Safari’s privacy floor by enabling Advanced Fingerprinting Protection across all browsing. Competitors differentiate through policy, packaging and features (for example, Orion’s zero telemetry and extension support; Opera’s free VPN and Aria; DuckDuckGo’s consent handling and Fire Button; Brave’s Shields and optional Guardian-powered VPN). The engine rule still determines the bounds of competition on Apple’s platforms; regulation, not technology, is what changes that picture.</p>
 <p>Keywords: #iOS #iPadOS #Safari #WebKit #BrowserEngineKit #DigitalMarketsAct #EU #Japan #SmartphoneAct #CMA #Privacy #Security #AdvancedFingerprintingProtection #LockedPrivateBrowsing #ProgressiveWebApps #JIT #WebBrowsers #OrionBrowser #Kagi #DuckDuckGo #BraveBrowser #OperaBrowser #AdBlocking #TrackerBlocking #Fingerprinting #FirewallVPN #CookiePopupProtection #AppStore #Guideline256 #CanadaTech #MobileWeb #iPhone #iPad #Regulation #Competition</p>
-<img src="uploads/2025/6dc687c39c.png">
+<img src="https://cdn.uploads.micro.blog/255457/2025/6dc687c39c.png">
 		</div>
 	  </div>
 	
@@ -260,7 +587,7 @@ Source: <a href="https://www.bleepingcomputer.com/news/security/massive-surge-in
 <p><strong>Singapore&rsquo;s <em>SkillsFuture</em> program</strong>, for instance, provides citizens with credits to subsidize continuous education throughout their careers. Similarly, <strong>Germany&rsquo;s renowned dual training system</strong> integrates classroom and on-the-job training, ensuring its workforce remains adaptable.</p>
 <p>These initiatives underscore a critical lesson: career security no longer comes from clinging to a single job, but from a commitment to continuous learning. For both employees and employers, investing in skills is the most effective strategy to build a productive, engaged, and resilient workforce for the future.</p>
 <p>Keywords: #JobClinging #WorkforceTrends #CareerGrowth #FutureOfWork #EmployeeEngagement #WorkplaceCulture #GlobalEconomy #LabourMarket #JobMarket #WorkplaceTrends #WorkplaceWellness #WorkforceDevelopment #SkillsGap #Automation #AI #Upskilling #Reskilling #Burnout #QuietQuitting #EmployeeRetention #WorkplaceInnovation #GlobalTrends #CareerDevelopment #WorkplaceStrategy #WorkplaceDynamics #HRTrends #LabourForce #FutureJobs #WorkplaceTransformation #EmployeeExperience #WorkplaceMotivation #WorkplaceChallenges #JobSatisfaction #WorkforceStrategy #CareerPlanning</p>
-<img src="uploads/2025/chatgpt-image-sep-29-2025-at-11-30-17-am.png" width="400" height="600" alt="">
+<img src="https://cdn.uploads.micro.blog/255457/2025/chatgpt-image-sep-29-2025-at-11-30-17-am.png" width="400" height="600" alt="">
 		</div>
 	  </div>
 	
