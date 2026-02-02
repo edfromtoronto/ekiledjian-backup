@@ -24,6 +24,128 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/02/02/cloudflare-with-warp-what-it.html">Cloudflare 1.1.1.1 with WARP: What it does and how it differs from a VPN</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/02/02/cloudflare-with-warp-what-it.html" class="u-url"><time class="dt-published" datetime="2026-02-02 14:58:16 -0500">Feb 2, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Cloudflare’s 1.1.1.1 with WARP resembles a virtual private network (VPN) in practice, acting as a secure tunnel and installing using the operating system’s VPN framework on many devices. Yet Cloudflare often resists the label, describing the service in its documentation as a free app intended to improve privacy and security. For IT professionals and privacy-conscious consumers, this is not just a matter of terminology. The technical architecture beneath the app fundamentally changes the privacy guarantees, the utility for bypassing geographic restrictions and the underlying security posture of the device.</p>
+<p>Choosing the right tool for the job requires a clear understanding of your requirements and your threat model. In practical terms, the same “connect” button can support very different outcomes depending on whether you need confidentiality on public Wi-Fi, location shifting for streaming, or reduced trust in the provider operating the tunnel.</p>
+<p>This analysis provides a decision framework for deploying these tools based on technical mechanics, strengths and limitations.</p>
+<ul>
+<li>If you need speed and straightforward encryption on public Wi-Fi, use WARP.</li>
+<li>If you need exit-country selection and geo-unblocking, use a commercial VPN.</li>
+<li>If you require provider anonymity and a minimized trust model, prefer a VPN supported by independent assurance and anonymous payment options.</li>
+</ul>
+<p>We will examine how Cloudflare’s edge network enables performance that many traditional VPNs struggle to match while acknowledging the trade-offs in anonymity and flexibility that remain core features of commercial VPNs.</p>
+<h3 id="what-1111-with-warp-actually-is">What 1.1.1.1 with WARP actually is</h3>
+<p>The foundation of the service is the 1.1.1.1 public DNS resolver, launched on Apr. 1, 2018. A DNS resolver translates human-readable domain names like example.com into the IP addresses computers use to reach the correct servers. Some internet service provider (ISP) resolvers log these queries, creating a trail of a user’s browsing history. Cloudflare positions the resolver as a privacy-focused alternative and says it does not sell user data.</p>
+<p>In September 2019, Cloudflare introduced WARP as an optional layer on top of this resolver. While the basic DNS service only encrypts the address-lookup phase of a connection, WARP can tunnel most device traffic, subject to platform behaviour and configuration. The service is available through a consumer mobile app, but it also exists as an operational mode for enterprise users within Cloudflare’s Zero Trust platform.</p>
+<p>That distinction matters. Enterprise Zero Trust deployments can involve different policy, logging, inspection and enforcement configurations that materially change user privacy expectations compared to the consumer app. Put plainly: the consumer privacy model is not automatically transferable to a managed enterprise environment where administrators may configure monitoring and controls.</p>
+<p>From a protocol and implementation perspective, WARP is not a re-skin of older VPN stacks. The technical core was originally built on BoringTun, an implementation of the WireGuard protocol written in Rust. WireGuard is generally easier to audit and faster to execute than legacy VPN stacks such as OpenVPN, largely because it is designed with a smaller, modern codebase and a narrow feature set.</p>
+<p>More recently, Cloudflare has incorporated MASQUE (Multiplexed Application Substrate over QUIC Encryption). MASQUE allows the client to tunnel traffic over HTTP/3 and QUIC. By tunnelling over QUIC, WARP can maintain a more resilient connection in environments where standard VPN ports might be blocked. This is particularly useful on hotel Wi-Fi or behind corporate firewalls that filter non-standard UDP traffic.</p>
+<p>Cloudflare has also introduced post-quantum cryptography (PQC) support in WARP for the tunnel. The goal is to mitigate “harvest now, decrypt later” risk, where encrypted traffic collected today could be decrypted in the future if cryptographic assumptions are broken. PQC in a tunnelling context is not a guarantee of anonymity or invulnerability, but it can be a meaningful hedge against specific long-horizon threats, depending on how and where it is implemented.</p>
+<h3 id="how-warp-functions-like-a-traditional-vpn">How WARP functions like a traditional VPN</h3>
+<p>While Cloudflare often avoids the term “VPN,” WARP shares several functional characteristics with VPN services. These characteristics provide baseline security benefits, especially for mainstream users who do not want to manage server lists, protocols or manual configuration.</p>
+<p>First, WARP creates an encrypted tunnel between the user’s device and the nearest Cloudflare data centre. With WARP enabled, an ISP typically sees an encrypted connection to Cloudflare rather than direct connections to each destination. This reduces ISP-level visibility into DNS lookups and browsing destinations and can materially reduce exposure to local network observers on untrusted networks.</p>
+<p>This distinction is important: DNS privacy alone encrypts only the “address lookup” portion of a connection. A full tunnel can protect a broader set of traffic flows against local interception and passive observation, although it does not eliminate all metadata.</p>
+<p>Second, websites and services visited generally see a Cloudflare IP address rather than the user’s original home or mobile IP. That can reduce basic IP-based tracking tied to a residential or cellular address, but it does not automatically create meaningful anonymity. Many services correlate users through cookies, device identifiers, logins and behavioural signals regardless of IP address.</p>
+<p>Third, WARP is available on iOS, Android, Windows, macOS and Linux. For organizations and individuals, that cross-platform availability makes WARP operationally attractive as a “default secure tunnel” capability. In 2025, Cloudflare documented changes so that all DNS traffic flows inside the WARP tunnel by default on supported platforms, which can simplify firewall rules and reduce configuration gaps.</p>
+<h3 id="critical-differences-from-commercial-vpns">Critical differences from commercial VPNs</h3>
+<p>Most confusion begins when users assume that a tunnel is a tunnel and that any VPN-shaped app delivers VPN-grade outcomes. In reality, several limitations make WARP unsuitable for common commercial VPN use cases.</p>
+<p>The first is exit-country selection. A core feature of commercial VPNs is the ability to choose an exit node in a different country. WARP does not allow this. It typically connects users to the closest Cloudflare data centre to prioritize performance and minimize latency. As a result, WARP is generally not suitable for geo-unblocking services such as Netflix or BBC iPlayer, where location selection is the point.</p>
+<p>The second is the trust model. WARP can reduce ISP and local-network visibility, but it concentrates trust in Cloudflare as the tunnel operator. If you are trying to reduce dependence on your ISP, you are inherently increasing reliance on Cloudflare’s infrastructure, policies and controls. That may be an acceptable trade for many users, but it is not an anonymity solution.</p>
+<p>According to Cloudflare’s WARP privacy documentation, the service collects limited DNS query and traffic data (excluding payload), including installation IDs and data transfer volumes. It does not include the contents of encrypted application traffic, but metadata can still be sensitive depending on your threat model.</p>
+<p>It is also important to treat audits precisely. In 2020, KPMG examined Cloudflare’s assertions regarding the 1.1.1.1 public DNS resolver privacy commitments for the period from Feb. 1, 2019, to Oct. 31, 2019. The examination found that Cloudflare generally followed its commitments to anonymize source IP addresses and delete logs within 25 hours. However, this report focused specifically on DNS resolver commitments and is not an independent audit of WARP’s full end-to-end tunnelling service.</p>
+<p>Finally, WARP is not positioned as a peer-to-peer (P2P) file-sharing service, and kill switch behaviour varies significantly by platform and release. Some operating systems support stronger “block all traffic if the tunnel drops” behaviour than others, and implementations evolve over time. For any security control that depends on fail-closed behaviour, you should validate what your specific client and operating system actually do under failure conditions.</p>
+<p>Operational resilience is another practical distinction. Cloudflare has experienced service disruptions, including a major global outage on Nov. 18, 2025. Cloudflare said core traffic was largely flowing as normal by 14:30 UTC after a manual rollback of a configuration file, with full restoration later. Incidents like this are not unique to Cloudflare, but they underscore a simple point: any single tunnel provider is a dependency that should be monitored, with documented fallback connectivity for business-critical use.</p>
+<h3 id="comparison-with-commercial-vpn-services">Comparison with commercial VPN services</h3>
+<p>To understand where WARP fits, it helps to compare it against common commercial VPN providers: NordVPN, ExpressVPN, Surfshark, Mullvad VPN and AzireVPN.</p>
+<h4 id="where-warp-excels">Where WARP excels</h4>
+<p>Speed is the primary differentiator. Because Cloudflare operates a large edge network, the hop between the user and the tunnel entry point is frequently minimal in major metropolitan areas. For latency-sensitive tasks such as video calls, online gaming or real-time collaboration, the performance impact can be modest compared with longer-haul VPN paths.</p>
+<p>WARP is also simple. The one-tap interface and “closest edge” routing model reduce decision-making and user error. For many people, the best security control is the one they will actually use consistently. WARP’s design makes “turn it on and forget it” more realistic than with many server-list-based VPN apps.</p>
+<p>WARP can also be operationally appealing in managed environments, particularly when paired with Cloudflare Zero Trust, because it offers an integrated model for device posture, policy enforcement and remote access. That is an organizational advantage, but it further reinforces that the privacy model depends on how the service is configured and administered.</p>
+<h4 id="where-traditional-vpns-excel">Where traditional VPNs excel</h4>
+<p>Commercial VPNs generally win on three dimensions: location flexibility, anonymity-oriented account models and independent assurance targeted at “no-logs” claims.</p>
+<p>Many providers allow jurisdiction and exit-node selection across dozens of countries. That can support geo-unblocking, reduce latency to a specific region or provide risk-based routing for travellers. It can also support “jurisdiction shopping,” where users prefer to route traffic through a country with legal or regulatory characteristics they view as favourable.</p>
+<p>On independent assurance, several providers have publicized third-party assessments related to logging and infrastructure claims. These assessments vary in scope and methodology, so they should be described narrowly and accurately:</p>
+<ul>
+<li>NordVPN has publicized its fifth independent no-logs assurance assessment conducted by Deloitte as of late 2024, with results published in 2025.</li>
+<li>ExpressVPN has publicized a KPMG examination of its TrustedServer technology and privacy policy compliance as of Feb. 28, 2025, with the report delivered in May 2025. ExpressVPN has also cited an earlier audit by PwC Switzerland in 2019 in relation to TrustedServer and privacy controls.</li>
+<li>Surfshark has publicized an independent assurance procedure by Deloitte covering its no-logs statement, with work conducted in mid-2025.</li>
+</ul>
+<p>For users seeking higher levels of anonymity, account and payment models matter. Mullvad is widely cited for not requiring an email address and for supporting anonymous payment options such as cash-by-mail and certain cryptocurrencies. AzireVPN highlights a diskless server approach designed to reduce the risk of data persistence on physical hardware.</p>
+<p>Security audits, however, are not interchangeable with no-logs audits. For example, a web application security assessment can be valuable and meaningful, but it does not validate a provider’s end-to-end logging posture. Mullvad has published multiple independent security assessments, including a web application security assessment by Assured AB in October 2025. That assessment speaks to the security posture of the audited web properties, not to “no-logs” assurances across the VPN network.</p>
+<p>Commercial VPN pricing varies by plan length and promotions, but it is often in the single digits to low teens per month in Canada.</p>
+<h3 id="free-warp-vs-warp-paid-service">Free WARP vs. WARP+ paid service</h3>
+<p>Cloudflare offers a premium tier known as WARP+, which typically costs about $5 to $10 a month in Canada, depending on app-store pricing and taxes. It is vital to understand that WARP+ changes routing, not the privacy model. Both tiers implement identical encryption and data handling policies. The subscription is generally limited to five devices per account.</p>
+<p>The primary benefit of WARP+ is Argo Smart Routing. Without WARP+, traffic typically follows standard routing after egress. With WARP+, Argo can steer traffic through more optimal paths across Cloudflare’s network. Cloudflare’s published benchmarks describe Argo Smart Routing as improving application performance by about 30 per cent on average, although results vary by geography, destination and network conditions.</p>
+<p>That 30 per cent figure should be treated as a benchmark claim rather than a guaranteed reduction in latency for every destination. For some users and routes, the improvement will be noticeable. For others, it will be negligible.</p>
+<h3 id="use-cases-and-recommendations">Use cases and recommendations</h3>
+<p>WARP is often sufficient for users who want basic protection on public Wi-Fi without manual configuration. It can also serve professionals who want encryption with limited performance impact, particularly in environments where traditional VPN traffic is throttled or blocked.</p>
+<p>For organizations, Cloudflare Zero Trust with WARP can be an effective way to secure remote access without managing a legacy VPN gateway, particularly when the goal is to enforce policy and reduce exposure rather than to provide user anonymity. That said, managed deployments should be documented clearly so users understand what is logged, what is inspected and what controls are in place.</p>
+<p>Commercial VPNs remain the better choice when you need exit-country selection, geo-unblocking or P2P support, subject to provider terms and applicable law. They can also be a better fit for users who want stronger anonymity properties through minimized account data and more privacy-oriented payment options.</p>
+<p>High-risk users, including journalists and activists, should make decisions based on a clear threat model rather than on generic “more private” claims. In those contexts, the ability to create an account without personal identifiers, the presence of robust kill switch behaviour on the target platform and the scope of independent assurance can matter more than raw speed.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Cloudflare 1.1.1.1 with WARP is an accessible approach to encrypted tunnelling. It simplifies a security baseline for users who might otherwise avoid more technical tools. By leveraging modern approaches such as MASQUE and post-quantum cryptography support, Cloudflare has built a service that prioritizes performance and resilience while offering a practical privacy improvement against local network observers and ISP-level DNS visibility.</p>
+<p>However, WARP has clear boundaries. It focuses on speed and convenience rather than on total anonymity or geographic flexibility. For many users, that is an acceptable and even desirable trade. For others, it is the wrong tool.</p>
+<p>The best strategy is to choose the tool that aligns with your requirements. If you need a fast, free and reliable way to secure public Wi-Fi, WARP is a practical choice. If you require anonymity from the service provider, jurisdiction selection or P2P support, a purpose-built VPN remains the appropriate option.</p>
+<hr>
+<p><strong>Ethics statement</strong></p>
+<p>This analysis is intended to support informed public discussion. It aims to describe network security architecture and privacy practices accurately, avoid sensationalism, and distinguish clearly between documented technical behaviour, stated provider commitments and the author’s interpretation. Where uncertainty exists—particularly where platform behaviour, configurations or vendor disclosures may vary—it is explicitly acknowledged. The article does not advocate for unlawful circumvention of geographic restrictions and does not attribute security outcomes to any protected group.</p>
+<p><strong>Disclaimer</strong></p>
+<p>This article is provided for general information and discussion purposes only. It is not legal, financial, investment, procurement or policy advice, and it should not be relied upon as such. Technical specifications, service features, privacy policies, audit scopes and software versions are subject to change as providers update products, documentation and methodologies. Any errors or omissions are unintentional.</p>
+<p>The views expressed are my own and are offered solely in my personal capacity. They do not represent the views of my employer, any current or former affiliated organizations, clients, partners or any other related entities.</p>
+<hr>
+<p><strong>References</strong></p>
+<p>Cloudflare Inc. “WARP client documentation.” <a href="https://developers.cloudflare.com/warp-client/">developers.cloudflare.com/warp-clie&hellip;</a><br>
+Cloudflare Inc. “Privacy · Cloudflare WARP client docs.” <a href="https://developers.cloudflare.com/warp-client/">developers.cloudflare.com/warp-clie&hellip;</a>privacy/<br>
+Cloudflare Inc. “Download WARP: All DNS traffic now flows inside the WARP tunnel.” <a href="https://developers.cloudflare.com/cloudflare-one/team-and-resources/devices/warp/download-warp/">developers.cloudflare.com/cloudflar&hellip;</a><br>
+Cloudflare Inc. “Announcing the Results of the 1.1.1.1 Public DNS Resolver Privacy Examination.” <a href="https://blog.cloudflare.com/announcing-the-results-of-the-1-1-1-1-public-dns-resolver-privacy-examination/">blog.cloudflare.com/announcin&hellip;</a><br>
+Cloudflare Inc. “Cloudflare outage on Nov. 18, 2025.” <a href="https://blog.cloudflare.com/18-november-2025-outage/">blog.cloudflare.com/18-novemb&hellip;</a><br>
+Cloudflare Inc. “Securing today for the quantum future: WARP client now supports post-quantum cryptography (PQC).” <a href="https://blog.cloudflare.com/post-quantum-warp/">blog.cloudflare.com/post-quan&hellip;</a><br>
+Cloudflare Inc. “Argo Smart Routing.” <a href="https://www.cloudflare.com/application-services/products/argo-smart-routing/">www.cloudflare.com/applicati&hellip;</a><br>
+NordVPN. “NordVPN verifies its no-logs assurance assessment for the fifth time.” <a href="https://nordvpn.com/blog/nordvpn-no-logs-audit-2024/">nordvpn.com/blog/nord&hellip;</a><br>
+ExpressVPN. “KPMG report confirms ExpressVPN’s no-logs policy.” <a href="https://www.expressvpn.com/blog/kpmg-2025-no-logs-policy-audit/">www.expressvpn.com/blog/kpmg&hellip;</a><br>
+Surfshark. “Surfshark’s no-logs policy verified by Deloitte again.” <a href="https://surfshark.com/blog/deloitte-nologs-policy-verified-again">surfshark.com/blog/delo&hellip;</a><br>
+Mullvad VPN. “Independent security audit of our web app completed by Assured.” <a href="https://mullvad.net/en/blog/independent-security-audit-of-our-web-app-completed-by-assured">mullvad.net/en/blog/i&hellip;</a><br>
+AzireVPN. “Unique server infrastructure.” <a href="https://www.azirevpn.com/service/servers">www.azirevpn.com/service/s&hellip;</a></p>
+<p>#Cloudflare #WARP #VPN #Cybersecurity #Privacy #Networking #Canada #InfoSec #Encryption #DataPrivacy #InternetSecurity #DNS #WireGuard #MASQUE #ZeroTrust #CloudSecurity #EndpointSecurity #NetworkSecurity #ThreatModel #PrivacyEngineering #CyberRisk #SecureConnectivity #RemoteWork #SASE #ZTNA #QUIC #HTTP3</p>
+<!-- raw HTML omitted -->
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://kiledjian.com/2026/01/30/ai-on-australian-travel-company.html" class="u-url"><time class="dt-published" datetime="2026-01-30 10:37:19 -0500">Jan 30, 2026</time></a>
+
+		<div class="e-content">
+			 <p><a href="https://edition.cnn.com/2026/01/28/travel/ai-tourism-nonexistent-hotsprings-intl-scli">AI on Australian travel company website sends tourists to nonexistent hot springs | CNN</a></p>
+<p>An AI-generated blog on the Tasmania Tours website recommended nonexistent hot springs in Weldborough, Tasmania, leading tourists to search for them in vain. The tour company owner admitted the AI &ldquo;messed up completely&rdquo;, while a local hotel owner confirmed tourists were arriving in droves looking for the phantom springs.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://kiledjian.com/2026/01/30/tired-of-sifting-through-security.html" class="u-url"><time class="dt-published" datetime="2026-01-30 07:57:12 -0500">Jan 30, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Tired of sifting through 47 security newsletters?</p>
+<p>I do it for you.</p>
+<p>Every morning I publish 10-15 handpicked threat intel stories at threatintel.cc — zero automation, zero fluff. Curated by a CISO who actually reads the research.</p>
+<p>No spam. No BS. Just signal.</p>
+<p>Free daily digest: <a href="https://threatintel.cc">threatintel.cc</a></p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/01/29/the-demographic-crossroads-understanding-natural.html">The Demographic Crossroads: Understanding Natural Population Decline</a></h1>
 		
 
