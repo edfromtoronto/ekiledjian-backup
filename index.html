@@ -24,6 +24,109 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/02/22/your-encrypted-email-is-a.html">Your encrypted email is a neon sign: applying the grey man principle to digital privacy</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/02/22/your-encrypted-email-is-a.html" class="u-url"><time class="dt-published" datetime="2026-02-22 22:51:39 -0500">Feb 22, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Every security blog, podcast and YouTube channel gives you the same advice. Use ProtonMail. Switch to Signal. Route everything through Tor. Encrypt your hard drive. The message is always the same: encrypt everything and you will be safe.</p>
+<p>I have spent more than 25 years in cybersecurity. I have built intelligence platforms for government agencies and I run security operations for a global enterprise. And I am going to tell you something most privacy guides will not: <strong>by following that advice to the letter, you may be making yourself a target instead of protecting yourself.</strong></p>
+<p>In the survival and preparedness community, there is a well-known concept called the grey man. The idea is simple. The person who blends into a crowd is the person nobody notices, nobody remembers and nobody targets. The grey man does not wear tactical pants and Oakley sunglasses to the grocery store. He does not carry a bag covered in morale patches. He dresses like everyone else, moves like everyone else and disappears into the baseline of his environment.</p>
+<p>Now apply that same thinking to your digital life.</p>
+<h2 id="two-goals-that-most-advice-conflates">Two goals that most advice conflates</h2>
+<p>Most people are trying to solve one or both of these problems when they think about digital privacy:</p>
+<p><strong>Confidentiality</strong> — can someone read your message, file or conversation?</p>
+<p><strong>Inconspicuousness</strong> — do your tools and patterns make you easier to flag, profile or remember?</p>
+<p>Encryption is excellent at confidentiality. It is not a complete strategy for inconspicuousness. Most security advice treats them as the same problem, and they are not. The grey man principle is about the second goal: reducing the signal you send to anyone deciding whether to pay attention to you.</p>
+<h2 id="the-tactical-tuxedo-problem">The tactical tuxedo problem</h2>
+<p>When you swap your Gmail address for a ProtonMail address on your business card, you are making a statement. When your email traffic is end-to-end encrypted while everyone around you relies on standard transport encryption, you stand out. When your network traffic routes through Tor while your colleagues browse normally, you are the equivalent of the person wearing a plate carrier at a coffee shop.</p>
+<p>You may be more protected. But you have already failed the first test of the grey man: not being noticed.</p>
+<p>This is not a theoretical concern. The Snowden disclosures gave us concrete proof. The National Security Agency’s XKeyscore system could be used to identify and flag users of encryption and anonymity tools. Disclosed NSA documents and training materials showed that the system could run queries like “all PGP usage in Iran” and would flag anyone connecting to Tor directory servers for further scrutiny and potential longer-term data retention. The XKeyscore rules explicitly labelled Tails — a privacy-focused Linux distribution — as “a comsec mechanism advocated by extremists on extremist forums.”</p>
+<p>The very tools the security community recommends were being used as selectors to identify people for closer surveillance. Using them did not make you invisible. It made you interesting.</p>
+<h2 id="metadata-is-the-real-intelligence">Metadata is the real intelligence</h2>
+<p>Here is something most privacy advice overlooks entirely. Intelligence agencies, law enforcement and even corporate adversaries often derive more value from metadata than from the content of your messages: who you talk to, when, how often and what tools you use.</p>
+<p>Edward Snowden said it plainly: metadata is extraordinarily intrusive. As an analyst, he preferred looking at metadata over content because it is quicker, easier and does not lie.</p>
+<p>ProtonMail encrypts your message body. Email as a protocol necessarily exposes routing metadata — who you are emailing, when and how frequently — and providers can be compelled to produce certain logs. Subject lines, depending on provider and configuration, may not be end-to-end encrypted either. In 2021, ProtonMail was compelled by a Swiss court order to log the IP address of a French climate activist after French police routed their request through Europol and Swiss authorities. The content was protected. The metadata told the story anyway.</p>
+<p>A 2021 FBI training document obtained through a freedom-of-information request laid this out with striking clarity. It catalogued exactly what data the FBI can legally obtain from nine major messaging apps. Signal gives up almost nothing: registration date and last connection date. WhatsApp, on the other hand, provides subscriber records and address book contacts in response to subpoena and search warrant, plus source and destination metadata for every message via pen register updated every 15 minutes, and potentially message content through iCloud backups if enabled and not end-to-end encrypted. The document confirmed what practitioners already knew: even when content encryption holds, metadata can be extraordinarily revealing.</p>
+<p>The same pattern applies to most encrypted tools. Signal encrypts your messages end to end. But your phone still registers on a cell tower. Your contacts still generate a social graph. And if a forensic examiner gets physical access to your device, tools like Cellebrite can extract and render message data when a device is unlocked or otherwise accessible — a reminder that end-to-end encryption protects data in transit, not at the endpoint.</p>
+<p>Encryption protects your content. It does not make you invisible. That distinction matters enormously.</p>
+<h2 id="cryptography-versus-steganography-two-different-philosophies">Cryptography versus steganography: two different philosophies</h2>
+<p>This is where the grey man concept maps perfectly to information security, and where most advice goes wrong.</p>
+<p>There are two different approaches to secure communication. Cryptography says: you can see that I am communicating, but you cannot read what I am saying. It provides privacy. Steganography says: you do not even know that I am communicating. It provides secrecy.</p>
+<p>The grey man’s philosophy is steganographic. He does not wear body armour under a neon vest. He wears a plain jacket and carries a nondescript bag. His protection is real but invisible.</p>
+<p>Most security advice is purely cryptographic. It wraps everything in visible encryption and then broadcasts the fact that you are someone who encrypts. To an intelligence analyst or adversary looking for targets of interest, that is a signal, not a shield.</p>
+<p>The smartest attackers already understand this. Living off the land (LOTL) techniques are the offensive equivalent of the grey man. Instead of deploying custom malware that triggers every alarm, sophisticated threat actors use PowerShell, Windows Management Instrumentation and other tools already present in the target environment. They blend into normal operations and become nearly undetectable. The grey man defender should think the same way: blend into normal digital patterns while quietly maintaining protection where it counts.</p>
+<h2 id="a-digital-grey-man-playbook">A digital grey man playbook</h2>
+<p>What does a grey man approach to digital privacy actually look like? It starts with your threat model.</p>
+<p><strong>Know your actual adversary.</strong> If you are a journalist protecting a source from a nation-state, use Tails and Tor and accept the visibility trade-off because the cost of exposure is higher than the cost of being flagged. But if you are a professional trying to protect your personal data from brokers, credential stuffing and opportunistic criminals — which describes the vast majority of people — the grey man approach is far more effective.</p>
+<p><strong>Use mainstream tools with disciplined hygiene.</strong> A Gmail account secured with a hardware security key, unique passwords and no third-party app access is harder to compromise than a ProtonMail account with a reused password and no second factor. The Gmail account also generates zero signal that you are a person who prioritizes privacy.</p>
+<p><strong>Own your outward identity. Route privately behind the scenes.</strong> One of the simplest grey man moves is to avoid making your privacy tool your public identity. Instead of giving out a recognizable “privacy brand” email address, use a neutral personal domain as your outward-facing address and route it to whatever service you trust on the back end. The outer layer is unremarkable. The inner layer is capable. This does not solve metadata, but it eliminates the superficial signal that your vendor choice otherwise broadcasts.</p>
+<p><strong>Layer protection inside normal channels.</strong> If you need to send a truly sensitive message, encrypt the content within a mainstream platform rather than switching to a conspicuous one. A password-protected attachment sent through Outlook is functionally encrypted and draws no unusual attention, provided you use a strong encryption format and share the passphrase through a separate channel. An encrypted file sent as a normal-looking attachment through a mainstream provider blends into ordinary business traffic.</p>
+<p><strong>Compartmentalize instead of centralizing.</strong> A common mistake is building a single “secure identity” and using it for everything. A more resilient approach is clear compartmentalization: a mainstream address for shopping, newsletters and low-risk accounts; a work address for corporate life; a privacy-focused workflow reserved for genuinely sensitive exchanges. The point is not secrecy for its own sake. It is limiting blast radius and avoiding the pattern where everything interesting about you lives in one place.</p>
+<p><strong>Resist the urge to encrypt everything.</strong> Not every message needs end-to-end encryption. Treating your lunch plans and your tax documents with the same level of cryptographic ceremony is like wearing a plate carrier to walk the dog. It wastes effort and draws attention. Apply strong protection where the data justifies it and use normal channels for everything else.</p>
+<p><strong>Let mainstream adoption be your camouflage.</strong> Signal has crossed a useful threshold: it is now mainstream enough that using it does not automatically signal paranoia. iMessage is even more grey because it is the default messaging platform across a massive installed base of Apple devices — and its end-to-end encryption is built into that default experience. When a security tool becomes widespread enough, using it stops being a signal and starts being baseline. Choose tools that have crossed that line.</p>
+<p><strong>Manage operational friction, because friction becomes a signal.</strong> When you force everyone around you to adopt unfamiliar, high-assurance tools for routine conversations, two things happen. You become memorable — the person who makes everything complicated. And people create workarounds: screenshots, forwards, copy-pastes, “can you just text me instead?” Those workarounds often erase the security gains you thought you achieved. A practical posture accepts that not every conversation is a high-risk event. Use secure mainstream defaults for routine coordination. Reserve high-assurance channels for high-assurance topics.</p>
+<p><strong>Avoid sudden behavioural shifts.</strong> Many monitoring systems are less interested in what you do than in how abruptly you change. A sudden pivot from normal app usage to always-on VPN, Tor-only browsing and niche encrypted services is a strong anomaly even if it is motivated by perfectly legitimate privacy concerns. If you are changing your posture, do it gradually and deliberately. The grey man does not suddenly start moving differently from everyone else. He transitions without creating a stimulus that triggers notice.</p>
+<p><strong>Mind your digital body language.</strong> In the physical world, the grey man avoids sweeping gestures, direct eye contact and anything that projects heightened awareness. The digital equivalent is avoiding privacy-obsessed usernames, not posting about your operational security practices on forums and not configuring your browser so aggressively that websites fingerprint you as unusual. A user running Brave with every tracking shield maxed out, using a VPN from a residential IP and blocking all JavaScript is not invisible. They are a unicorn.</p>
+<p><strong>Treat travel as a separate threat model.</strong> If you expect enhanced scrutiny at a border crossing or in a high-risk environment, apply the grey man principle directly. Carry a travel device with minimal data and minimal accounts. Use ordinary, supportable configurations. Do not create a puzzle-box posture that invites questions. This is not about defeating lawful processes. It is about reducing unnecessary exposure and avoiding avoidable complexity in environments where you have fewer controls.</p>
+<h2 id="when-to-break-grey">When to break grey</h2>
+<p>There are situations where the grey man approach is the wrong call and maximum encryption is the correct choice, visibility be damned.</p>
+<p>Journalists protecting sources under authoritarian regimes. Whistleblowers communicating with oversight bodies. Activists co-ordinating under state surveillance. Human rights workers in hostile countries. In these scenarios, the cost of having your content exposed dramatically outweighs the cost of being flagged as someone who uses encrypted tools. If you are in one of these situations, you already know it, and the full suite of privacy tools exists specifically for you.</p>
+<p>But for the vast majority of people who receive generic security advice, the grey man approach delivers a better balance of protection and practicality.</p>
+<h2 id="the-bottom-line">The bottom line</h2>
+<p>The best security posture is not always the most encrypted one. Sometimes it is the most invisible one.</p>
+<p>Real-world security is not a fortress. It is a set of trade-offs. Encryption is necessary. It is not sufficient. Strong tools protect content, but they do not automatically hide relationships, patterns or intent.</p>
+<p>If your objective includes “do not stand out,” your strategy should favour secure defaults inside mainstream behaviour, compartmentalization to limit blast radius, selective escalation for genuinely sensitive scenarios and a bias toward boring, stable and supportable choices.</p>
+<p>The physical grey man knows that the most dangerous moment is not the confrontation. It is target selection. If you are chosen, you are already at a disadvantage. The same is true in the digital world. Every tool, every habit and every configuration choice you make sends a signal about who you are and what you are protecting. The goal is not to send a signal that says “I have something to hide.” The goal is to send no signal at all.</p>
+<p>Stop dressing your digital life in tactical gear. Start blending in.</p>
+<hr>
+<h2 id="ethics-statement">Ethics statement</h2>
+<p>This article is intended to support informed discussion about personal digital privacy and security trade-offs. It aims to describe surveillance capabilities, metadata exposure and privacy tool limitations accurately; avoid sensationalism; and distinguish clearly between documented disclosures, publicly reported events and the author’s professional interpretation. Where uncertainty exists — including where tool capabilities, provider policies or legal frameworks may vary by jurisdiction — it is explicitly acknowledged. This article does not advocate unlawful evasion of legal processes, unauthorized circumvention of security controls or any activity intended to obstruct lawful investigations.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This article is provided for general information and discussion purposes only. It is not legal, security, privacy or professional advice, and it should not be relied upon as such. Technical capabilities, provider policies, encryption implementations, legal frameworks and surveillance practices are subject to change. Threat models, legal obligations and acceptable risk vary by individual, organization and jurisdiction. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</p>
+<hr>
+<h2 id="keywords">Keywords</h2>
+<p>#DigitalPrivacy #Cybersecurity #InfoSec #ThreatModeling #OPSEC #Encryption #Metadata #PrivacyStrategy #OnlineSecurity #SecurityAwareness #RiskManagement #CyberRisk #DataProtection #CyberResilience #IdentitySecurity #AccountSecurity #MFA #HardwareSecurityKey #ZeroTrust #AnomalyDetection #BehavioralAnalytics #BrowserFingerprinting #SecureDefaults #Compartmentalization #DataBrokers #CredentialStuffing #Surveillance #SignalsIntelligence #EndpointSecurity #TravelSecurity #PrivacyTools #SignalApp #TorNetwork #ProtonMail #iMessage #OperationalSecurity #GreyMan #PrivacyEngineering #CyberHygiene</p>
+<!-- raw HTML omitted -->
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://kiledjian.com/2026/02/16/speedtest-connectivity-report-canada-h.html" class="u-url"><time class="dt-published" datetime="2026-02-16 12:07:59 -0500">Feb 16, 2026</time></a>
+
+		<div class="e-content">
+			 <p><a href="https://www.ookla.com/research/reports/canada-speedtest-connectivity-report-h2-2025">Speedtest® Connectivity Report | Canada H2 2025</a></p>
+<p>The Speedtest Connectivity Report for Canada H2 2025 reveals Bell as the leader in 5G performance, offering the fastest 5G speeds and best mobile gaming and video experiences. Bell pure fibre also dominated the fixed broadband market, recognized as the fastest and top-rated ISP with the best gaming experience. Rogers excelled in mobile video experience and 5G availability, while TELUS was noted for the most consistent mobile network.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://kiledjian.com/2026/02/15/the-era-of-ai-selfsufficiency.html">The Era of AI Self-Sufficiency: Microsoft’s Strategic Pivot </a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/02/15/the-era-of-ai-selfsufficiency.html" class="u-url"><time class="dt-published" datetime="2026-02-15 18:39:12 -0500">Feb 15, 2026</time></a>
+
+		<div class="e-content">
+			 <p>The headlines saying Microsoft is &ldquo;ditching&rdquo; OpenAI are a bit sensationalist, but the underlying shift is very real. Microsoft AI CEO Mustafa Suleyman recently confirmed a major move toward developing in-house foundation models.</p>
+<p>The Reality: Microsoft isn&rsquo;t walking away from its 27% stake in OpenAI. Instead, they are moving toward &ldquo;True AI Self-Sufficiency.&rdquo; By building their own frontier models (like the rumored MAI-1) with gigawatt-scale compute, Microsoft is reducing its dependency on a single partner.</p>
+<p>Why this matters:</p>
+<p>• Diversification: Microsoft is now hosting models from Meta, Mistral, and Anthropic.
+• Cost Efficiency: Running in-house models at scale is far more sustainable than paying API margins for every Copilot query.
+• Competition: In 2026, the &ldquo;moat&rdquo; isn&rsquo;t just the model—it’s the compute and the data.</p>
+<p>The Microsoft-OpenAI partnership is evolving from &ldquo;exclusive dependency&rdquo; to &ldquo;strategic alliance.&rdquo; It’s a masterclass in how a tech giant scales: Partner to lead, then build to own.</p>
+<p>#AI #TechStrategy #Microsoft #OpenAI #FutureOfWork #CloudComputing</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/02/15/a-massive-shift-for-ai.html">A Massive Shift for AI Agents: Peter Steinberger Joins OpenAI </a></h1>
 		
 
