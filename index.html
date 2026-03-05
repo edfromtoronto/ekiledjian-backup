@@ -24,6 +24,67 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/03/05/heretic-and-the-new-reality.html">Heretic and the new reality of modifiable AI safety  </a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/03/05/heretic-and-the-new-reality.html" class="u-url"><time class="dt-published" datetime="2026-03-05 09:21:56 -0500">Mar 5, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Open-source large language models have made advanced generative AI broadly accessible. What is changing now is not only model capability, but the ease with which model behaviour can be altered after release — including behaviour that vendors and labs describe as “safety alignment.”</p>
+<p>One of the most visible examples is Heretic, an open-source project that automates the removal of refusal behaviour in transformer-based language models. The project is not subtle about its purpose. It describes itself as “fully automatic censorship removal,” and it is gaining traction quickly.</p>
+<p>This post does not provide instructions for disabling safeguards. Instead, it focuses on what is verifiably true about the tool, the research it is built on, and why this matters for security leaders, developers and governance teams.</p>
+<h2 id="what-heretic-is">What Heretic is</h2>
+<p>Heretic is a Python-based tool that modifies a model to reduce or eliminate refusal responses. It does this through a technique known as directional ablation, commonly referred to in the community as “abliteration.” The tool combines that intervention with automated parameter search using Optuna’s Tree-structured Parzen Estimator (TPE) optimiser.</p>
+<p>In practical terms, Heretic aims to find settings that reduce refusals while keeping the modified model close to the original model’s behaviour on benign prompts. The project describes this trade-off explicitly as co-minimizing refusal counts and KL divergence.</p>
+<p>Project home:<br>
+<a href="https://github.com/p-e-w/heretic">github.com/p-e-w/her&hellip;</a></p>
+<p>A key point many summaries miss is licensing. Heretic is licensed under the GNU Affero General Public License (AGPL) v3.0. That is not a permissive licence. It has real implications for anyone who plans to modify and run the software in networked environments.</p>
+<h2 id="what-it-is-built-on-the-refusal-direction-research">What it is built on: the “refusal direction” research</h2>
+<p>Heretic’s core premise follows mechanistic interpretability research published in 2024: “Refusal in Language Models Is Mediated by a Single Direction,” by Arditi et al.</p>
+<p>In that work, researchers found that refusal behaviour in multiple popular chat models can be linked to a one-dimensional subspace in the residual stream. They demonstrate that removing that direction reduces refusals, while adding it can induce refusals even for harmless requests. The broader conclusion is uncomfortable but important: current alignment methods can be brittle, and model behaviour can sometimes be controlled through targeted internal interventions rather than retraining.</p>
+<p>Paper (Arditi et al.):<br>
+<a href="https://arxiv.org/abs/2406.11717">arxiv.org/abs/2406&hellip;.</a></p>
+<h2 id="how-heretic-differs-from-earlier-abliteration-workflows">How Heretic differs from earlier abliteration workflows</h2>
+<p>Abliteration itself is not new. What Heretic productizes is automation and repeatability.</p>
+<p>Earlier approaches often required manual experimentation: selecting layers, choosing projection strengths and validating results with ad hoc tests. Heretic packages that into an optimiser-driven workflow. It searches parameter combinations to reduce refusals and limit behavioural drift, using quantitative measures as guardrails.</p>
+<p>This is one of the reasons it is being discussed widely. Automation lowers the barrier from “researcher with time” to “user with a capable workstation.”</p>
+<h2 id="what-the-project-and-evaluations-actually-show">What the project and evaluations actually show</h2>
+<p>Two claims circulate frequently: that Heretic can drive refusals close to zero, and that it can do so while preserving most baseline capabilities.</p>
+<p>The project’s own documentation includes examples where Heretic-generated models show refusal suppression comparable to other abliterations, with lower KL divergence in that specific comparison. The documentation also stresses that numerical results vary by hardware and software environment and that benchmarks are not a substitute for human evaluation.</p>
+<p>Independent evaluation work in late 2025 compared Heretic to other abliteration tools across a range of instruction-tuned models. The headline finding was not that any tool is perfect, but that trade-offs are real and model-dependent. The same paper also cautions that controlled benchmarks do not necessarily predict long-run behaviour in multi-turn use.</p>
+<p>Comparative analysis paper (Young et al.):<br>
+<a href="https://arxiv.org/abs/2512.13655">arxiv.org/abs/2512&hellip;.</a></p>
+<p>A consistent theme across reports is that structured reasoning tasks are among the most sensitive. In other words, removing refusals can be technically achievable, but retaining all capabilities is not guaranteed. This should be treated as an engineering problem, not an assumption.</p>
+<h2 id="community-adoption-and-the-pace-of-iteration">Community adoption and the pace of iteration</h2>
+<p>Heretic’s repository shows rapid iteration and strong adoption. Discussion threads on r/LocalLLaMA track releases and performance claims, including changes aimed at reducing VRAM requirements and improving model-loading flexibility. There is also active discussion about false positives in refusal detection and the limits of simple refusal scoring.</p>
+<p>Example discussion threads:<br>
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/1oymku1/heretic_fully_automatic_censorship_removal_for/">www.reddit.com/r/LocalLL&hellip;</a><br>
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/1r4n3as/heretic_12_released_70_lower_vram_usage_with/">www.reddit.com/r/LocalLL&hellip;</a></p>
+<p>This matters because the practical capability is not only the tool, but the ecosystem it enables: repeatable creation and distribution of modified models.</p>
+<h2 id="why-this-matters-for-enterprise-security-and-governance">Why this matters for enterprise security and governance</h2>
+<p>From an enterprise perspective, Heretic is less a novelty and more a signal.</p>
+<p>First, it reinforces that “model safety” is not a reliable control boundary. If a model can be modified to remove refusals, then system safety must be enforced through architecture: data controls, identity, rate limiting, monitoring, output filtering and purpose-built guardrails at the application layer.</p>
+<p>Second, it complicates third-party risk assumptions. If an organisation relies on aligned behaviour as a compliance or safety control, it should assume that aligned behaviour can be bypassed when models are run locally or in uncontrolled environments.</p>
+<p>Third, it raises governance and legal questions. If an organisation modifies and serves software under AGPL, that triggers obligations. Separately, deploying modified models without clear controls can raise policy and regulatory concerns, depending on use case, jurisdiction and sector.</p>
+<p>A practical way to think about it is simple: treat model alignment as a property that can change, and treat safety as something you must engineer end-to-end.</p>
+<h2 id="bottom-line">Bottom line</h2>
+<p>Heretic is a credible, fast-moving implementation of a well-known research insight: refusal behaviour can be represented in low-dimensional directions and suppressed through targeted intervention. It is also a reminder that safety alignment, as currently implemented in many open models, is not an immutable feature.</p>
+<p>For security leaders, the right response is not panic and not denial. It is disciplined control design. Assume models can be modified. Build safety at the system level.</p>
+<p>Sources<br>
+Heretic repository: <a href="https://github.com/p-e-w/heretic">github.com/p-e-w/her&hellip;</a><br>
+Arditi et al. (2024): <a href="https://arxiv.org/abs/2406.11717">arxiv.org/abs/2406&hellip;.</a><br>
+Optuna TPE sampler documentation: <a href="https://optuna.readthedocs.io/en/stable/reference/samplers/generated/optuna.samplers.TPESampler.html">optuna.readthedocs.io/en/stable&hellip;</a><br>
+Young et al. (2025): <a href="https://arxiv.org/abs/2512.13655">arxiv.org/abs/2512&hellip;.</a><br>
+Community threads:<br>
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/1oymku1/heretic_fully_automatic_censorship_removal_for/">www.reddit.com/r/LocalLL&hellip;</a><br>
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/1r4n3as/heretic_12_released_70_lower_vram_usage_with/">www.reddit.com/r/LocalLL&hellip;</a></p>
+<p>Keywords: #AI #ArtificialIntelligence #LLM #LargeLanguageModels #MachineLearning #GenerativeAI #AIResearch #AIAlignment #AISafety #AIsecurity #CyberSecurity #InfoSec #EnterpriseSecurity #RiskManagement #AIGovernance #AIRegulation #ResponsibleAI #TechPolicy #DigitalRisk #ModelSecurity #AITrends #AIInnovation #AIethics #OpenSourceAI #DeepLearning #TransformerModels #DataSecurity #ThreatLandscape #SecurityLeadership #CISO #FutureOfAI #EmergingTech #TechStrategy #SecurityStrategy #CyberRisk</p>
+<!-- raw HTML omitted -->
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 
 		<a href="https://kiledjian.com/2026/03/01/are-dorseys-giant-job-cuts.html" class="u-url"><time class="dt-published" datetime="2026-03-01 09:08:28 -0500">Mar 1, 2026</time></a>
 
