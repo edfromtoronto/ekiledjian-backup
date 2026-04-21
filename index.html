@@ -24,6 +24,98 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/04/21/tunnelcrack-is-not-new-but.html">TunnelCrack is not new — but it is still worth understanding</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/04/21/tunnelcrack-is-not-new-but.html" class="u-url"><time class="dt-published" datetime="2026-04-21 15:06:37 -0400">Apr 21, 2026</time></a>
+
+		<div class="e-content">
+			 <p>I am sharing this because, even though TunnelCrack is not new, I think many people will still find it interesting. It is one of those security stories that says something bigger than the headline itself. In this case, the real lesson is not about a brand-new exploit. It is about an old assumption many people still make about VPNs.</p>
+<p>TunnelCrack was publicly disclosed in August 2023. The dedicated disclosure site went live on Aug. 8, 2023, and the related research was presented at USENIX Security 2023 shortly after. What made the disclosure notable was not that VPN encryption had been “cracked,” but that the researchers showed how routing exceptions outside the tunnel could be abused to leak traffic in some situations.</p>
+<p>That distinction matters.</p>
+<p>If you think a VPN automatically forces every packet, in every circumstance, through an encrypted path, TunnelCrack is a useful reminder that reality is more conditional.</p>
+<h2 id="what-tunnelcrack-actually-is">What TunnelCrack actually is</h2>
+<p>TunnelCrack is the name given to two related attack families that exploit how VPN clients configure routing on a device.</p>
+<p>In a typical full-tunnel VPN setup, the client changes the operating system’s routing behaviour so traffic goes through the VPN by default. But many VPN clients also make exceptions so the device can still do two things outside the tunnel:</p>
+<ul>
+<li>Reach the local network</li>
+<li>Reach the VPN server itself so the tunnel can remain established</li>
+</ul>
+<p>Those exceptions are often necessary for usability and connectivity. They can also create risk.</p>
+<p>The two attack families disclosed by the researchers are:</p>
+<h3 id="localnet">LocalNet</h3>
+<p>This attack abuses the exception that allows traffic to the local network to bypass the VPN tunnel. On a malicious or untrusted local network, an attacker may be able to manipulate local addressing so some traffic is treated as local and sent outside the tunnel.</p>
+<h3 id="serverip">ServerIP</h3>
+<p>This attack abuses the exception that allows traffic to the VPN server’s IP address to travel outside the tunnel. Under the right conditions, including control over DNS responses or local network positioning, an attacker may be able to influence traffic so it leaks outside the VPN tunnel.</p>
+<p>The important point is that TunnelCrack is not mainly a cryptographic failure. It is a routing and policy problem.</p>
+<h2 id="why-the-original-disclosure-mattered">Why the original disclosure mattered</h2>
+<p>The research was not framed as a single-vendor bug. It described a broad design issue across the VPN ecosystem.</p>
+<p>The paper reports 248 experiments against 67 VPN products and found that every VPN product tested was vulnerable on at least one device. The researchers also said the weakness was independent of the underlying VPN protocol, which means strong protocol design does not help if traffic is routed outside the tunnel before the protection is applied.</p>
+<p>That is why TunnelCrack mattered then, and still matters now.</p>
+<p>It challenged a simplistic view of VPNs that still shows up in consumer marketing and, frankly, in some enterprise assumptions.</p>
+<h2 id="what-tunnelcrack-does--and-does-not--mean">What TunnelCrack does — and does not — mean</h2>
+<p>There are two easy mistakes people make with this story.</p>
+<p>The first is to overstate it and say VPNs are useless. That is wrong.</p>
+<p>The second is to dismiss it as an academic edge case. That is also wrong.</p>
+<p>TunnelCrack does not mean the encryption used by modern VPN protocols was broken. It does not mean HTTPS suddenly stops protecting web sessions. In many cases, TLS will still protect the content layer.</p>
+<p>But TunnelCrack can still matter because it may allow an attacker to:</p>
+<ul>
+<li>Leak traffic outside the tunnel</li>
+<li>Expose plaintext traffic where higher-layer protection is absent</li>
+<li>Reveal metadata or destinations</li>
+<li>Interfere with connectivity</li>
+<li>Support redirection or deanonymization scenarios, depending on the setup</li>
+</ul>
+<p>The right conclusion is not that VPNs are broken. The right conclusion is that VPN protection depends on implementation, platform behaviour and network conditions.</p>
+<h2 id="why-platform-differences-matter">Why platform differences matter</h2>
+<p>One of the more interesting parts of the disclosure was how uneven the exposure was across operating systems.</p>
+<p>Reporting on the original research noted that most VPN apps on Apple platforms and many on Windows and Linux were vulnerable to one or both attack types, while Android fared better in the original TunnelCrack testing. OpenVPN also stated that Android is not vulnerable to these specific attacks because of how Android implements VPN networking.</p>
+<p>That does not make any platform universally safe. It does reinforce a more important point: operating system design has a major influence on how well a VPN can enforce tunnel integrity.</p>
+<p>It also means enterprise security teams should validate VPN behaviour by platform, not just by vendor name.</p>
+<h2 id="why-tunnelcrack-still-matters-in-2026">Why TunnelCrack still matters in 2026</h2>
+<p>TunnelCrack is still relevant for three reasons.</p>
+<p>First, many people still misunderstand what a VPN actually guarantees. The common mental model is binary: connected means protected. TunnelCrack shows that this is not always how endpoint networking behaves in practice.</p>
+<p>Second, the issue did not remain isolated. In 2024, Leviathan Security disclosed TunnelVision, another routing-based VPN bypass technique involving DHCP option 121. Mullvad said TunnelVision was very similar to TunnelCrack LocalNet from a privacy and security standpoint. The details differ, but the broader lesson is the same: routing-based VPN bypasses are a real class of problem.</p>
+<p>Third, hostile local networks are still part of modern risk. Public Wi-Fi in hotels, airports, cafés, conference centres and other travel settings remains a practical concern, especially for executives, journalists, activists and anyone handling sensitive work on the move.</p>
+<h2 id="what-users-and-organizations-should-do">What users and organizations should do</h2>
+<p>The practical response is fairly straightforward.</p>
+<h3 id="for-users">For users</h3>
+<ul>
+<li>Keep your VPN client fully updated</li>
+<li>Avoid untrusted Wi-Fi for sensitive work where possible</li>
+<li>Use a trusted personal hotspot when practical</li>
+<li>Disable local network access when you do not need it</li>
+<li>Treat the VPN as one security layer, not the only one</li>
+<li>Prefer services and applications that enforce HTTPS properly</li>
+</ul>
+<h3 id="for-enterprise-security-teams">For enterprise security teams</h3>
+<ul>
+<li>Review whether local network access is enabled by default</li>
+<li>Validate routing behaviour separately on Windows, macOS, iOS, Android and Linux</li>
+<li>Confirm whether firewall rules or policy routing prevent public traffic from escaping outside the tunnel</li>
+<li>Revisit user guidance for travel, hotel Wi-Fi and executive-risk scenarios</li>
+<li>Be careful with assurance language such as “all traffic is protected” unless you have validated how the client behaves on each supported platform</li>
+</ul>
+<p>This is also a useful reminder that marketing language such as “military-grade encryption” is not enough. If traffic can be pushed outside the tunnel, the strength of the encryption inside the tunnel is not the only thing that matters.</p>
+<h2 id="the-bottom-line">The bottom line</h2>
+<p>TunnelCrack is not new. The public disclosure dates back to August 2023.</p>
+<p>What makes it interesting is that it exposed a much older design assumption in how many VPN clients handle routing and tunnel exceptions. The lesson is not that VPNs have no value. The lesson is that secure encryption inside a tunnel does not automatically guarantee secure routing to the tunnel.</p>
+<p>That is a more subtle point than most headlines capture.</p>
+<p>It is also the point worth remembering.</p>
+<h2 id="ethics-statement">Ethics statement</h2>
+<p>This article is intended to support informed discussion about VPN security, routing behaviour and practical security architecture. It aims to describe publicly documented research accurately, distinguish between validated findings and professional interpretation, and avoid sensationalism or overstating the real-world impact.</p>
+<p>This article does not endorse unauthorized testing, rogue access point deployment, DNS spoofing, traffic interception or any activity that would violate law, policy or responsible disclosure norms.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This article is provided for general information and discussion purposes only. It is not legal, security, privacy, compliance or other professional advice, and it should not be relied upon as such. Technical behaviour varies by operating system, VPN client, software version, configuration and network environment. Vendor mitigations and platform behaviour may also change over time.</p>
+<p>This analysis is based on publicly available research, advisories and vendor documentation available at the time of writing. Any errors or omissions are unintentional. The views expressed are those of the author in a personal capacity and do not represent the views of any employer, client, partner or affiliated organization. Generative AI tools were used to assist with research and editing.</p>
+<h2 id="keyword">Keyword:</h2>
+<p>#Cybersecurity #InfoSec #VPN #TunnelCrack #TunnelVision #NetworkSecurity #SecurityArchitecture #RoutingSecurity #Privacy #DigitalPrivacy #ThreatModelling #ZeroTrust #RemoteAccess #PublicWiFi #TravelSecurity #EndpointSecurity #WireGuard #OpenVPN #IPsec #DNS #TrafficLeak #Deanonymization #SecurityResearch #RiskManagement #CyberRisk #SecurityAwareness #CyberHygiene #EnterpriseSecurity #CISO #Kiledjian</p>
+<!-- raw HTML omitted -->
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/04/19/jet-fuel-risk-is-now.html">Jet fuel risk is now a traveller issue: What it could mean for your summer plans</a></h1>
 		
 
