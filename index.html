@@ -24,6 +24,50 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/10/05/what-building-bagcheck-taught-me.html">What Building BagCheck Taught Me About AI Coding, Edge Computing and Cloudflare Workers</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/10/05/what-building-bagcheck-taught-me.html" class="u-url"><time class="dt-published" datetime="2026-10-05 08:19:17 -0400">Oct 5, 2026</time></a>
+
+		<div class="e-content">
+			 <p>I built bag-check.org to understand how far AI-assisted software development has come.</p>
+<p>I expected to learn more about coding. What I did not expect was how much the project would change the way I think about compute, user experience and security.</p>
+<p>BagCheck now has data on more than 1,500 bags and 160 airlines. It checks physical fit separately from what a ticket actually allows, handles multi-airline trips and leaves an answer unresolved when the available evidence is not good enough.</p>
+<p>Underneath it, BagCheck runs on vinext and Cloudflare Workers.</p>
+<p>For most of my career, the application model was easy to visualize. You provisioned compute, installed and configured the application, patched the operating system and runtime, monitored capacity, protected the host and made sure the environment stayed available.</p>
+<p>With BagCheck, there is no application server for me to provision, patch, size or keep warm.</p>
+<p>I deploy code.</p>
+<p>Cloudflare executes that code across its distributed infrastructure using lightweight V8 isolates rather than dedicating a virtual machine to each workload. Workers avoids the VM-style cold starts associated with many traditional serverless architectures, and code can execute close to where a request enters Cloudflare&rsquo;s network.</p>
+<p>That changes the user&rsquo;s experience. I do not have to operate application infrastructure in multiple regions to give users in different parts of the world a responsive application.</p>
+<p>It also changes the cybersecurity model.</p>
+<p>Serverless does not eliminate security risk. It changes which risks I own.</p>
+<p>I am no longer responsible for hardening and patching an application server, protecting its operating system or maintaining the underlying runtime. But I still own the security of the application: authentication, authorization, data handling, secrets, dependencies, APIs and cloud configuration.</p>
+<p>Privacy works the same way. Running at the edge does not automatically make an application private. Privacy still depends on what data you collect, where you send it and how long you retain it.</p>
+<p>There are trade-offs too. Distributed compute can make state, data location, observability and debugging more complicated. If an application still has to reach a distant database for every request, putting the compute closer to the user does not remove that latency.</p>
+<p>Vinext adds an interesting bit of recursion. It reimplements much of the Next.js API on Vite so applications can run natively on platforms such as Cloudflare Workers. Vinext itself began as an experiment in using AI to rebuild much of that framework.</p>
+<p>So I built BagCheck to understand AI-assisted coding, and it now runs on technology that was itself partly born from an AI coding experiment.</p>
+<p>The most useful lesson has been broader than coding.</p>
+<p>Building something real forces you to think about architecture, performance, security, privacy, evidence and user experience together.</p>
+<p>BagCheck also follows a rule I care about in AI systems: when the evidence does not support an answer, say so.</p>
+<p>That may be the most useful thing this little experiment has taught me.</p>
+<p>bag-check.org</p>
+<h2 id="ethics-and-transparency-statement">Ethics and transparency statement</h2>
+<p>BagCheck is a personal learning project I built to experiment with AI-assisted software development, modern web architecture and related technologies.</p>
+<p>AI tools were used extensively in the development of the application and to assist with research, drafting and editing this article. The technical decisions, conclusions and responsibility for the published content remain mine.</p>
+<p>I have no financial relationship with Cloudflare or the vinext project, and neither paid for, reviewed or approved this article. References to their technologies are based on my use of them in BagCheck and publicly available technical documentation.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>The views expressed here are my personal views and do not represent the views, positions or strategies of my employer, its affiliates, customers, partners or colleagues.</p>
+<p>This article is for informational and educational purposes only. It is not security, privacy, architecture, legal or other professional advice.</p>
+<p>Cloud services, software frameworks, runtime behaviour and security controls change over time. Architectural and security characteristics also depend on implementation, configuration, dependencies, data flows and operating environment. Anyone considering these technologies should evaluate them against their own technical, security, privacy and regulatory requirements.</p>
+<h2 id="keywords">Keywords</h2>
+<p>#AI #ArtificialIntelligence #AICoding #AIAssistedDevelopment #SoftwareDevelopment #Cloudflare #CloudflareWorkers #Vinext #Vite #NextJS #React #EdgeComputing #Serverless #ServerlessComputing #CloudComputing #CloudArchitecture #EdgeArchitecture #DistributedComputing #WebDevelopment #WebArchitecture #V8 #PerformanceEngineering #UserExperience #Cybersecurity #CloudSecurity #ApplicationSecurity #SecureByDesign #Privacy #PrivacyByDesign #DataPrivacy #TechnologyStrategy #EnterpriseArchitecture #CISO #TechnologyLeadership #ResponsibleAI #AIGovernance #DigitalTransformation #BagCheck</p>
+<img src="uploads/2026/edge-computing-takes-flight.png">
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/10/01/qr-codes-in-what-the.html">QR Codes in 2026: What the Real Risk Looks Like</a></h1>
 		
 
@@ -139,7 +183,7 @@
 <p>RFID, NFC, payment technologies, fraud techniques, security controls and product capabilities can change over time and may vary by card issuer, payment network, credential type, device, jurisdiction and operating environment.</p>
 <p>Readers should assess security controls against their own assets, threat model, risk tolerance and requirements, and independently verify information that is material to a security or purchasing decision.</p>
 <p>Any errors or omissions are unintentional.</p>
-<img src="uploads/2026/rfid.png">
+<img src="https://cdn.uploads.micro.blog/255457/2026/rfid.png">
 		</div>
 	  </div>
 	
