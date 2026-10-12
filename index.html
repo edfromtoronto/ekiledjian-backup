@@ -24,6 +24,57 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/10/12/yandexs-outage-the-bot-claims.html">Yandex’s outage: the bot claims and the recovery evidence</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/10/12/yandexs-outage-the-bot-claims.html" class="u-url"><time class="dt-published" datetime="2026-10-12 14:45:29 -0400">Oct 12, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Ukrainian strikes on Yandex data centres were followed by a sharp decline in automated network traffic. The measurements support an infrastructure disruption. They do not establish that Russian propaganda accounts went silent worldwide.</p>
+<p>For security leaders, the recovery evidence is more actionable: the outage impaired production services and, for at least one customer, access to the backup needed to restore elsewhere.</p>
+<h2 id="what-the-measurements-show">What the measurements show</h2>
+<p>Reuters reported strikes on three Yandex data centres between Oct. 8 and 11, 2026. Yandex said its Sasovo and Vladimir facilities stopped operating, while part of its Kaluga infrastructure was disabled. A facility shutdown does not establish the destruction of every system it housed.</p>
+<p>Two measurements describe different aspects of the disruption:</p>
+<ul>
+<li><strong>Yandex Cloud, AS200350:</strong> Cloudflare Radar directly reported traffic averaging about 33 per cent below normal following the Sasovo strike. The decline began around 22:30 UTC on Oct. 7.</li>
+<li><strong>Yandex LLC, AS13238:</strong> Tom’s Hardware reported automated requests falling to 0.4 per cent of their preceding two-week peak on Oct. 11, citing Cloudflare Radar. Subsequent reporting described partial recovery.</li>
+</ul>
+<p>These observations concern different networks, traffic measures and baselines. They cannot be combined into an estimate of worldwide bot activity.</p>
+<p>The 0.4 per cent figure describes a low point relative to one network’s recent peak. It provides no basis for concluding that 99.6 per cent of propaganda accounts disappeared.</p>
+<h2 id="why-the-propaganda-claim-remains-unproven">Why the propaganda claim remains unproven</h2>
+<p>Cloudflare identifies YandexBot as a legitimate search-engine indexing crawler. Its automated requests help populate Yandex’s search index. Cloudflare’s network chart measures requests classified as automated; it does not classify political content or count coordinated social-media accounts.</p>
+<p>Network origin, automation and influence activity are separate questions. The observed source address does not, by itself, establish who directed a request, who funded it or what purpose it served.</p>
+<p>An influence operation dependent on affected Yandex infrastructure could have lost hosting or supporting services. That is a plausible mechanism, not a demonstrated outcome.</p>
+<p>A credible assessment would follow a defined group of identified influence accounts across comparable periods before and after the strikes. It would measure posting activity and reach, compare unaffected groups and account for platform enforcement or migration to other infrastructure. Evidence linking those accounts to the damaged facilities would strengthen attribution.</p>
+<p>RFE/RL reported researchers challenging the social-bot interpretation of the chart. The effect on influence operations remains unquantified. The available evidence establishes neither a major effect nor no effect.</p>
+<h2 id="what-the-recovery-evidence-reveals">What the recovery evidence reveals</h2>
+<p>The owner of Pulse, an app with 8,000 users, told Reuters that users could not access the service and his company could not reach its backup database in Yandex Cloud. An attempt to restore elsewhere returned an error. He had no confirmation of data loss.</p>
+<p>This illustrates a dependency that a successful backup job can conceal. Retrieving a backup may require services impaired by the same outage as production.</p>
+<p>Yandex’s incident notices described most high-availability database clusters switching over, while some could remain read-only or unavailable. Failover therefore did not necessarily restore the ability to transact.</p>
+<p>At a reported recovery checkpoint, its identity and access service was available, while Audit Trails and Yandex SIEM were unavailable. Yandex also introduced manual resource-quota management, restricted expansion and advised customers to use external recovery sites. These were incident observations, not a statement that every affected service remained unavailable throughout the recovery period.</p>
+<p>The notices expose distinct constraints: access to data, capacity to run the workload and security visibility during recovery.</p>
+<h2 id="what-i-would-require-a-recovery-test-to-prove">What I would require a recovery test to prove</h2>
+<p>A recovery point objective sets acceptable data loss. A recovery time objective sets acceptable restoration time. Neither is demonstrated by a completed backup job or the existence of another availability zone.</p>
+<p>For each critical service, I would require a timed restoration test that assumes the primary provider’s management and support services are unavailable. The team should retrieve the backup, restore the required dependencies and complete a representative business transaction.</p>
+<p>The test should record the age of the recovered data, elapsed restoration time, missing security capabilities and any intervention required from the provider. Reading a database is insufficient when the business must accept writes.</p>
+<p>If audit or detection services remain unavailable, the team needs to understand the visibility gap and the conditions under which continued operation is acceptable.</p>
+<p>An alternate location is useful only to the extent that it escapes the dependencies causing the outage. That does not automatically require a second cloud provider. It requires a recovery design whose relevant failure boundaries are understood and tested.</p>
+<p>The evidence I would bring to a board is specific: which business service was restored, under what failure conditions, in how long, with what data loss and with which security capabilities available.</p>
+<h2 id="ethics-and-transparency-statement">Ethics and transparency statement</h2>
+<p>AI tools assisted with research, source comparison, drafting and editing. This article draws on public provider statements, published telemetry and attributed reporting. No original network measurements, forensic investigation or independent infrastructure testing were conducted.</p>
+<p>Reported observations are distinguished from analysis. References to companies do not constitute endorsements, and discussion of the strikes does not endorse attacks on civilian infrastructure. Final editorial judgment and responsibility for publication remain mine.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>The views expressed are my personal views and do not represent the positions of my employer, its affiliates, customers or partners.</p>
+<p>This article provides general information and analysis, not individualized cybersecurity, privacy, legal or other professional advice. It reflects sources available on Oct. 12, 2026. Measurements, service availability and assessments of damage may change as recovery continues.</p>
+<p>Availability telemetry alone does not establish personal-data exposure, permanent data loss or the military purpose of affected infrastructure. This article makes no determination about the legality of the strikes.</p>
+<h2 id="keywords">Keywords</h2>
+<p>#Cybersecurity #CloudSecurity #CloudComputing #CloudResilience #DigitalResilience #OperationalResilience #BusinessContinuity #DisasterRecovery #IncidentResponse #RiskManagement #CISO #SecurityLeadership #TechnologyLeadership #CyberThreatIntelligence #ThreatIntelligence #Telemetry #NetworkMonitoring #Observability #Cloudflare #Yandex #BotTraffic #WebCrawlers #Disinformation #InformationIntegrity #DataPrivacy #DataProtection #BackupAndRecovery #HighAvailability #SecurityMonitoring #EvidenceBasedAnalysis</p>
+<img src="uploads/2026/silent-racks-resilient-cloud.png">
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/10/09/from-llama-to-beam-who.html">From Llama 3 to Beam: Who Really Controls Your AI?</a></h1>
 		
 
