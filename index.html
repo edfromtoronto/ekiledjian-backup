@@ -24,6 +24,142 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/10/19/the-yandex-bot-collapse-was.html">The Yandex Bot Collapse Was Real. The Viral Conclusion Wasn&#39;t.</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/10/19/the-yandex-bot-collapse-was.html" class="u-url"><time class="dt-published" datetime="2026-10-19 09:25:08 -0400">Oct 19, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Following Ukrainian drone strikes on Yandex data centres in October 2026, a Cloudflare Radar chart showing a collapse in automated traffic circulated widely as evidence that Russian social-media influence operations had gone silent.</p>
+<p>The traffic decline was real, but the chart measured automated web requests, primarily from Yandex&rsquo;s search crawler. It did not measure social-media accounts or political influence operations.</p>
+<p>Subsequent investigations by Cloudflare and Graphika found little evidence supporting the viral claims. Cloudflare also documented malicious automation moving to other hosting providers after the disruption.</p>
+<p>The incident offers a useful example of how accurate network telemetry can produce misleading conclusions when its scope is misunderstood.</p>
+<h2 id="what-happened">What happened</h2>
+<p>Between October 7 and 11, Ukrainian drones struck three Yandex data centres in Sasovo, Kaluga and Vladimir.</p>
+<p>By October 11, Cloudflare reported that traffic from Yandex Search (AS13238) had fallen approximately 99% below its baseline. Traffic from Yandex.Cloud (AS200350) was down roughly 90%.</p>
+<p>The chart most frequently shared online showed automated traffic from Yandex&rsquo;s search network falling to 0.4% of its preceding two-week peak.</p>
+<p>Commentators linked the decline to reduced activity among suspected Russian-operated accounts in German, American and British political communities. Ukrainian President Volodymyr Zelenskyy and other political figures also amplified the connection. According to Graphika, six prominent posts attracted 6.3 million views.</p>
+<p>My <a href="https://kiledjian.com/2026/10/12/yandexs-outage-the-bot-claims.html">earlier article</a> examined the infrastructure disruption and its resilience implications. The subsequent Cloudflare and Graphika investigations provide a clearer picture of what the traffic measurements represented.</p>
+<h2 id="what-cloudflare-counts-as-a-bot">What Cloudflare counts as a bot</h2>
+<p>In Cloudflare&rsquo;s telemetry, a bot is an automated client making HTTP requests to websites on its network. That includes search crawlers, monitoring services, AI agents and scripts used for malicious activity.</p>
+<p>Cloudflare assigns requests a <a href="https://developers.cloudflare.com/bots/concepts/bot-score/">bot score</a> between 1 and 99. Lower scores indicate a greater likelihood of automation. The classification is based on signals such as request characteristics, browser behaviour and machine learning models.</p>
+<p>The company separately identifies verified bots whose identity and behaviour meet its requirements. YandexBot, Googlebot and Bingbot are among its recognized search crawlers.</p>
+<p>Automation is a substantial part of normal internet activity. Cloudflare&rsquo;s 2025 Year in Review found that Googlebot generated more than a quarter of verified bot requests on its network. Imperva&rsquo;s 2025 Bad Bot Report estimated that automated clients generated 51% of the traffic it measured during 2024, including 37% classified as malicious and 14% as benign.</p>
+<p>Those figures reflect different vendor populations and methodologies, so they are not directly comparable.</p>
+<p>A bot classification describes how traffic is generated. It does not establish the operator&rsquo;s identity, nationality or purpose. That distinction is particularly important when interpreting claims about political influence operations.</p>
+<h2 id="what-cloudflare-found-after-the-strikes">What Cloudflare found after the strikes</h2>
+<p>On October 14, Cloudflare published <a href="https://blog.cloudflare.com/yandex-outage/">its analysis of the Yandex outage</a>, separating traffic from Yandex Search and Yandex.Cloud.</p>
+<p>The two networks carried different types of automation.</p>
+<h3 id="yandex-search-mostly-legitimate-crawling">Yandex Search: Mostly legitimate crawling</h3>
+<p>Cloudflare classified 99.5% of requests from Yandex Search (AS13238) as automated. Of those bot requests, 93.6% came from verified crawlers.</p>
+<p>The network accounted for approximately 7% of Russia-origin bot requests observed by Cloudflare, but only 0.05% of its global bot traffic.</p>
+<p>The disruption therefore removed a substantial volume of legitimate search-indexing activity. For websites served through Cloudflare, the most visible effect was fewer requests from Yandex&rsquo;s search crawlers.</p>
+<p>There was no basis in those measurements for concluding that social-media accounts had stopped posting.</p>
+<h3 id="yandexcloud-malicious-traffic-moved-elsewhere">Yandex.Cloud: Malicious traffic moved elsewhere</h3>
+<p>Yandex.Cloud (AS200350) had a different traffic profile. Approximately 95% of its scored requests were classified as automated, and none of its observed bot requests were verified.</p>
+<p>Cloudflare reported that bot traffic from the network declined about 40% following the strikes. WordPress plugin probing fell approximately 90%, while scanner-identified traffic declined 93%.</p>
+<p>One case provided evidence of what happened to some of that activity.</p>
+<p>A gambling-sector customer had been receiving substantial automated traffic from Yandex.Cloud. After the October 8 disruption, those requests stopped arriving from that network.</p>
+<p>Almost immediately, requests with matching JA4 TLS fingerprints, unusual paths, headers and User-Agent strings began arriving from other Russian hosting providers, including Radist and Selectel.</p>
+<p>Across gambling-sector targets, Russia-origin bot requests increased 1.4% over the comparison period, from 167.7 million to 170.1 million.</p>
+<p>Cloudflare&rsquo;s evidence indicated that this particular operation had migrated rather than stopped.</p>
+<p>The finding concerns abusive web automation, not a political influence campaign. It demonstrates that losing access to one hosting provider does not necessarily interrupt an operator&rsquo;s activity.</p>
+<h2 id="what-happened-to-overall-bot-traffic">What happened to overall bot traffic</h2>
+<p>Cloudflare&rsquo;s aggregate measurements showed little change globally.</p>
+<p>Before the strikes, automated requests represented approximately 39.4% of all HTTP requests on Cloudflare&rsquo;s network. On October 11, the figure was 39.5%.</p>
+<p>Among requests originating from Russian IP addresses, the automated share fell from 50.4% to 42.2%, broadly consistent with the loss of Yandex traffic.</p>
+<p>Cloudflare also examined requests to the post, reply and like endpoints of an unnamed social-media platform. It found a 5.7% decline from Russian IP addresses and a 1.1% increase globally. Neither variation was considered unexpected.</p>
+<p>Cloudflare concluded that its data did not appear to support the claim that Russian social-media manipulation had been crippled, although it could not rule out a connection without additional evidence.</p>
+<p>There is another measurement distinction worth preserving. Cloudflare&rsquo;s figures describe shares of HTTP requests. Other analyses use HTML requests, which more closely approximate page views. These denominators produce different percentages and cannot be substituted for one another.</p>
+<h2 id="what-graphika-found-on-social-platforms">What Graphika found on social platforms</h2>
+<p>Graphika&rsquo;s <a href="https://www.graphika.com/blogs/yandex-strikes-russian-influence-operations">October 13 investigation</a> examined activity in political communities named by the viral posts, including those associated with Germany&rsquo;s Alternative für Deutschland (AfD), the American MAGA movement and Britain&rsquo;s Reform UK.</p>
+<p>Its findings did not support claims that these communities had lost their active accounts or highest-volume posters.</p>
+<p>For example, Graphika recorded 40,365 posts from 1,022 accounts in an AfD-related community on October 11, compared with 42,040 posts from 1,037 accounts the preceding Sunday.</p>
+<p>The approximately 4% decline was within normal variation. Over the previous 11 weeks, Sunday posting volumes in that community had fluctuated by as much as 38%.</p>
+<p>Graphika also found that some widely circulated charts used unusually narrow comparison periods or started at peaks driven by news events. Small changes to the time window sometimes substantially altered the apparent decline.</p>
+<p>The investigation did identify lower activity in Russian-language spaces. Telegram channels published approximately 5% to 15% fewer posts during the two days following the Vladimir strike.</p>
+<p>Graphika did not establish what caused those declines. Russian connectivity restrictions and regional disruptions complicated the comparison. Its October 11 and 12 data was also incomplete when collected.</p>
+<p>Graphika assessed with moderate confidence that the strikes had not silenced accounts in the Western political communities identified by the viral claims.</p>
+<h2 id="the-limits-of-network-attribution">The limits of network attribution</h2>
+<p>There is a separate problem with using network traffic to identify influence operations.</p>
+<p>An IP address establishes where a request originated from the perspective of the observing network. It does not reliably establish who controlled the activity.</p>
+<p>Commercial hosting, VPNs and residential proxies allow operators to distribute requests across infrastructure in different countries.</p>
+<p>In January 2026, <a href="https://cloud.google.com/blog/topics/threat-intelligence/disrupting-largest-residential-proxy-network">Google&rsquo;s Threat Intelligence Group</a> reported disrupting IPIDEA, a large residential proxy network. Google observed more than 550 tracked threat groups using IPIDEA exit-node addresses during a single week.</p>
+<p>This complicates efforts to associate activity with a particular country or infrastructure provider.</p>
+<p>It also helps explain why source-based traffic controls have limitations. Cloud workloads can move between providers, and residential proxies can make automated requests appear to originate from ordinary consumer connections.</p>
+<p>Cloudflare&rsquo;s Yandex.Cloud investigation illustrates how behavioural characteristics can remain consistent even as network origins change.</p>
+<p>The matching TLS fingerprints, request paths and headers supported its assessment that the gambling-sector abuse operation had migrated. Those characteristics are useful for correlation, although they are not unique identifiers of an operator and can also occur in legitimate traffic.</p>
+<h2 id="what-the-evidence-establishes">What the evidence establishes</h2>
+<p>The available research supports several conclusions.</p>
+<p>The strikes disrupted Yandex infrastructure and caused major declines in traffic from its networks. Most of the widely circulated search-network bot traffic was legitimate crawling. Cloudflare identified malicious automation that moved to alternative providers, while Graphika found no notable loss of active accounts in the Western political communities named by viral posts.</p>
+<p>The research does not establish whether particular Russian influence operations suffered localized infrastructure losses. No public evidence reviewed for this article directly connects an identified influence network&rsquo;s disappearance to the affected Yandex facilities.</p>
+<p>Russian influence operations are well documented. In September 2026, Graphika reported a Russia-aligned campaign targeting German and American political figures. The existence of those operations, however, does not establish a relationship to the Yandex outage.</p>
+<p>From a cybersecurity perspective, the case illustrates a familiar limitation of aggregate telemetry. A sharp change in a network metric can accurately describe an infrastructure event while providing little evidence about the broader activity attributed to it.</p>
+<p>The distinction matters for security reporting. Bot volumes, blocked requests, network origins and account activity measure different things. An apparent reduction in one may reflect a genuine disruption, a change in traffic composition or migration to another provider.</p>
+<p>The Yandex outage produced measurable infrastructure disruption and reduced search crawling. Some abusive automation continued from other networks. The social-media claims went beyond the available evidence.</p>
+<p>The chart was accurate. The conclusion attached to it was not supported by what the chart measured.</p>
+<hr>
+<h2 id="sources">Sources</h2>
+<ol>
+<li>Cloudflare, <a href="https://blog.cloudflare.com/yandex-outage/">Yandex outage: Data shows that instead of going dark, malicious bots went on the move</a>, October 14, 2026.</li>
+<li>Graphika, <a href="https://www.graphika.com/blogs/yandex-strikes-russian-influence-operations">Did the Yandex Data Center Strikes Silence Russian Bots? What the Data Shows</a>, October 13, 2026.</li>
+<li>Renée DiResta, Lawfare, <a href="https://www.lawfaremedia.org/article/the-russian-bots-went-silent.-or-did-they">The Russian Bots Went Silent. Or Did They?</a>, October 14, 2026.</li>
+<li>Cloudflare, <a href="https://developers.cloudflare.com/bots/concepts/bot-score/">Bot score documentation</a>.</li>
+<li>Cloudflare, <a href="https://developers.cloudflare.com/bots/concepts/bot/verified-bots/">Verified Bots documentation</a>.</li>
+<li>Cloudflare, <a href="https://blog.cloudflare.com/radar-2025-year-in-review/">2025 Radar Year in Review</a>.</li>
+<li>Imperva, <a href="https://www.imperva.com/resources/resource-library/reports/2025-bad-bot-report/">2025 Bad Bot Report</a>.</li>
+<li>Google Threat Intelligence Group, <a href="https://cloud.google.com/blog/topics/threat-intelligence/disrupting-largest-residential-proxy-network">Disrupting the world&rsquo;s largest residential proxy network</a>, January 28, 2026.</li>
+<li>Graphika, <a href="https://www.graphika.com/insights/russia-aligned-influence-operation-targets-us-midterm-candidates-german-state-elections">Russia-aligned influence operation targets U.S. midterm candidates and German state elections</a>, September 2026.</li>
+</ol>
+<h2 id="ethics-and-transparency">Ethics and transparency</h2>
+<p>AI tools assisted with research, source comparison, drafting and editing. This article relies on attributed third-party research and published network measurements. I conducted no original network measurements or independent social-media analysis. Final editorial judgment and responsibility for publication remain mine. Discussion of the strikes does not imply endorsement of attacks on civilian infrastructure.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>The views expressed are personal and do not represent my employer or its affiliates. This article provides general cybersecurity analysis, not individualized professional or legal advice. It reflects publicly available information reviewed as of October 19, 2026. Vendor measurements are not necessarily comparable, and the analysis makes no determination about the legality of the strikes or the overall scale of Russian influence operations.</p>
+<img src="uploads/2026/diverging-data-streams-in-blue-and-amber.png">
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://kiledjian.com/2026/10/13/ai-model-benchmarks-why-the.html">AI model benchmarks: Why the highest score may not offer the best value</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/10/13/ai-model-benchmarks-why-the.html" class="u-url"><time class="dt-published" datetime="2026-10-13 12:50:50 -0400">Oct 13, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Artificial Analysis recently updated its Intelligence Index, providing a useful comparison of leading AI models across reasoning, coding, scientific problems and autonomous tasks.</p>
+<p>The October 2026 benchmark places Claude Opus 5.5 at the top with a composite score of 58. The more interesting finding, however, is how significantly costs differ between models with relatively similar scores.</p>
+<p>For organizations investing in AI, those differences warrant closer examination.</p>
+<h2 id="understanding-the-numbers">Understanding the numbers</h2>
+<p><a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">Artificial Analysis</a> evaluates models across ten benchmarks and publishes estimated execution costs alongside performance.</p>
+<p>Its cost comparison shows that organizations can pay considerably more for relatively small improvements in overall benchmark scores.</p>
+<p>That does not necessarily make the more expensive model a poor investment. Aggregate scores can conceal meaningful differences in specific capabilities, particularly coding, complex reasoning and autonomous execution.</p>
+<p>The cost figures also require context. They represent weighted benchmark-task costs, not the full expense of operating AI in production.</p>
+<p>A model that requires several attempts or extensive human review may ultimately cost more than one with higher inference pricing.</p>
+<h2 id="what-this-means-for-enterprise-ai">What this means for enterprise AI</h2>
+<p>I would evaluate models against the actual work they are expected to perform.</p>
+<p>Routine classification, summarization and information extraction may be handled economically by smaller models. Complex investigations, security architecture reviews and specialized analysis may justify more capable systems.</p>
+<p>The relevant measure is the total cost of producing an accurate, usable result, including validation and any necessary corrections.</p>
+<p>Organizations should also assess performance across individual benchmarks rather than relying exclusively on the composite index.</p>
+<p>Security and privacy require separate consideration. Intelligence rankings do not establish whether a service meets requirements for data protection, retention, access controls or regulatory compliance.</p>
+<p>These concerns become particularly important when AI agents receive permission to access corporate systems or execute actions.</p>
+<h2 id="making-informed-decisions">Making informed decisions</h2>
+<p>The Artificial Analysis data makes a compelling case for evaluating multiple models rather than automatically selecting the highest-ranked option.</p>
+<p>For larger organizations, routing work between models based on task complexity may improve economics. Any savings need to be weighed against the additional integration, monitoring and governance requirements.</p>
+<p>The benchmark provides a useful starting point. Production testing should establish whether the expected benefits are achievable.</p>
+<p><strong>I would rather deploy a model that consistently delivers the required outcome at a reasonable cost than pay a premium for capabilities the workload rarely needs.</strong></p>
+<hr>
+<p><strong>Sources:</strong> <a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">Artificial Analysis Intelligence Index</a> | <a href="https://artificialanalysis.ai/methodology/intelligence-benchmarking">Benchmark methodology</a> | <a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a></p>
+<h1 id="ethics-and-transparency">Ethics and Transparency</h1>
+<p>This article was prepared with AI-assisted research and editorial support. Benchmark results were reviewed against publicly available Artificial Analysis documentation. No independent model testing was conducted. The analysis and conclusions reflect my own assessment of the available evidence. No compensation or consideration was received from any vendor mentioned.</p>
+<h1 id="disclaimer">Disclaimer</h1>
+<p>The views expressed are my own and do not necessarily represent those of my employer or its affiliates. This article is provided for informational and educational purposes and should not be considered professional, technical, legal or investment advice. AI capabilities, benchmark results and pricing are subject to change. Organizations should conduct their own assessments before making technology or procurement decisions.</p>
+<p><strong>Keywords:</strong> Artificial Intelligence, AI Benchmarks, Artificial Analysis, Enterprise AI, AI Economics, AI Governance, Cybersecurity, Privacy, LLMs, AI Model Selection</p>
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/10/12/yandexs-outage-the-bot-claims.html">Yandex’s outage: the bot claims and the recovery evidence</a></h1>
 		
 
