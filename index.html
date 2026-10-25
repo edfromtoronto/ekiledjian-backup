@@ -24,6 +24,188 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/10/25/deepseeks-deepinfer-release-exposes-the.html">DeepSeek&#39;s DeepInfer release exposes the economics behind cheap AI</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/10/25/deepseeks-deepinfer-release-exposes-the.html" class="u-url"><time class="dt-published" datetime="2026-10-25 13:04:35 -0400">Oct 25, 2026</time></a>
+
+		<div class="e-content">
+			 <p>DeepSeek has released the inference engine behind its V4.1-Flash model, providing an unusually detailed look at how the company serves large language models at scale. The accompanying technical documentation includes production throughput, infrastructure design decisions and revenue figures that challenge conventional assumptions about the cost of operating advanced AI.</p>
+<p>The numbers are remarkable. DeepSeek reports processing 155 trillion tokens daily on a single production cluster, generating US$38 in revenue per GPU-hour at discounted off-peak rates.</p>
+<p>Those figures have prompted speculation that DeepSeek&rsquo;s aggressive pricing may be more financially sustainable than previously assumed.</p>
+<p>That conclusion is plausible, but the available evidence does not establish profitability. Revenue per GPU-hour tells us little about actual margins without knowing hardware costs, utilization, energy consumption, depreciation and the expense of operating the surrounding infrastructure.</p>
+<p>The more interesting story is in the engineering. DeepSeek has published enough information to explain how it reduces the computational and memory costs associated with large-scale inference. Some of these optimizations are available in its newly released code. Others depend on proprietary infrastructure that remains outside the public release.</p>
+<p>For enterprise technology leaders, the release offers useful lessons about infrastructure efficiency, security and the economics of deploying AI.</p>
+<h2 id="what-deepseek-actually-released">What DeepSeek actually released</h2>
+<p>On October 20, 2026, DeepSeek published <a href="https://github.com/deepseek-ai/DeepInfer">DeepInfer</a>, its high-performance inference framework, under the Apache 2.0 licence.</p>
+<p>DeepInfer supports DeepSeek-V4.1-Flash, a 552-billion-parameter mixture-of-experts (MoE) model announced in September. The repository uses the updated V4.1-Flash-1017 checkpoint by default.</p>
+<p>An inference engine handles the work required to execute a trained model: loading weights, distributing computation, managing batches and generating output tokens. It can substantially influence latency, throughput and operating costs without changing the model&rsquo;s learned capabilities.</p>
+<p>DeepInfer includes several important components:</p>
+<ul>
+<li>Optimized kernels for attention, matrix multiplication and expert-parallel communication.</li>
+<li>Distributed execution and expert load balancing.</li>
+<li>DSpark speculative decoding.</li>
+<li>Sliding-window attention recovery through bounded replay.</li>
+<li>Asynchronous scheduling and deterministic inference options.</li>
+<li>Structured output support, including JSON Schema and regular expressions.</li>
+</ul>
+<p>The project builds on existing inference technologies. DeepSeek credits vLLM as a primary foundation, with additional influence from SGLang and TensorRT-LLM.</p>
+<p>There is an important limitation. The repository provides an offline execution engine, not a complete production-ready AI service.</p>
+<p>DeepSeek explicitly excludes its distributed KV-cache storage service, the full vision/prefill/decode disaggregation infrastructure and load balancing across data-parallel replicas. Those components are necessary to reproduce the architecture of its hosted environment.</p>
+<p>This distinction is particularly relevant for organizations evaluating whether open-source inference software can deliver the same economics as a commercial provider.</p>
+<h2 id="the-economics-of-155-trillion-tokens">The economics of 155 trillion tokens</h2>
+<p>According to DeepSeek&rsquo;s <a href="https://github.com/deepseek-ai/DeepInfer/blob/main/doc/inference_deployment_qa.md">inference deployment Q&amp;A</a>, one production cluster processes approximately 155 trillion tokens every 24 hours.</p>
+<p>That is equivalent to roughly 1.8 billion tokens per second across the cluster.</p>
+<p>DeepSeek also reports US$38 in revenue per GPU-hour at its discounted off-peak pricing.</p>
+<p>These are vendor-reported operating metrics. DeepSeek has not published enough supporting financial information to independently calculate its full cost per token or operating margin.</p>
+<p>A comparison against publicly advertised GPU rental rates can provide some context, but it cannot establish profit. Rental prices vary substantially by accelerator, reservation period, utilization and infrastructure provider. A cloud rental rate also represents a different cost basis from an operator&rsquo;s ownership and depreciation expenses.</p>
+<p>There are further questions about workload composition. Cached input tokens have different economics from newly processed input, while output generation typically requires more expensive sequential computation. The proportion of cached traffic, request lengths and concurrency levels can materially affect revenue and cost.</p>
+<p>Nevertheless, the figures deserve attention. DeepSeek&rsquo;s architecture explains how the company can improve output per unit of computing capacity.</p>
+<h3 id="why-prefill-and-decode-are-separated">Why prefill and decode are separated</h3>
+<p>AI inference consists of two principal stages.</p>
+<p>During <strong>prefill</strong>, the model processes an incoming prompt and constructs the intermediate representations needed to generate a response. Large prompts generally require substantial matrix-multiplication capacity.</p>
+<p>During <strong>decode</strong>, the model generates output tokens sequentially. Each step accesses model weights and attention state, making memory bandwidth a major constraint.</p>
+<p>These workloads benefit from different hardware configurations.</p>
+<p>DeepSeek&rsquo;s V4.1-Flash model uses a causal encoder-decoder architecture designed to reduce the computational requirements of prompt processing. According to its <a href="https://deepseek.com/en/news/deepseek-v4-1-flash/">official announcement</a>, the model has 552 billion total parameters, with approximately eight billion active during input processing and 16 billion during output generation.</p>
+<p>The model uses an asymmetric design in which the input-processing portion does less work than conventional approaches that apply comparable computation throughout the network.</p>
+<p>The result is lower prefill cost without requiring all model parameters to participate in every operation.</p>
+<p>DeepSeek combines this architecture with separate hardware arrangements for the two inference stages.</p>
+<p>Prefill runs on conventional eight-GPU servers, generally using relatively small expert-parallel groups.</p>
+<p>Decode uses considerably larger groups of 64 to 128 GPUs, allowing model experts to be distributed across more accelerators.</p>
+<p>The production design aims to balance processing speed, hardware utilization and memory traffic while maintaining acceptable response latency.</p>
+<h2 id="why-spreading-experts-across-gpus-matters">Why spreading experts across GPUs matters</h2>
+<p>The Mixture-of-Experts architecture is fundamental to DeepSeek&rsquo;s efficiency.</p>
+<p>An MoE model contains multiple specialized neural network components, known as experts. For each token, only a subset of those experts is activated.</p>
+<p>Although the full model must remain accessible, each inference step uses only a fraction of its parameters.</p>
+<p>That reduces computation, but it introduces another problem: the activated expert weights still need to be retrieved from GPU memory.</p>
+<p>During decoding, repeatedly moving these weights can become more expensive than performing the calculations themselves.</p>
+<p>DeepInfer addresses this through Wide Expert Parallelism.</p>
+<p>DeepSeek&rsquo;s deployment documentation describes a configuration with 384 routed experts distributed across 64 or more GPUs. At EP64, the deployment can place approximately seven experts on each GPU, including redundant copies used for load balancing.</p>
+<p>By distributing expert weights across more accelerators, the system reduces the amount of weight data each GPU must access during a decoding step.</p>
+<p>This can improve response latency and allow the cluster to process more concurrent requests.</p>
+<p>The published benchmarks show that the benefits vary with workload. Wide expert parallelism is particularly useful when individual users require fast responses. Its relative advantage can be smaller when batch throughput matters more than interactive latency.</p>
+<p>The design therefore involves an engineering trade-off. Larger GPU groups improve certain memory and latency characteristics while increasing infrastructure complexity and the need for high-speed interconnects.</p>
+<h3 id="preventing-overloaded-experts-from-slowing-the-cluster">Preventing overloaded experts from slowing the cluster</h3>
+<p>Distribution creates another difficulty.</p>
+<p>Not every expert receives the same amount of work. Demand varies according to the incoming requests, and a heavily loaded expert can delay an entire distributed operation.</p>
+<p>DeepInfer uses an Expert Parallelism Load Balancer (EPLB) to address that imbalance.</p>
+<p>The system measures expert utilization and maintains redundant copies of selected experts. When workloads change, expert weights can be redistributed across available GPUs.</p>
+<p>For decode, DeepSeek describes a 1,000-step statistics window and reassignment every 10,000 steps. Prefill uses a shorter measurement and reassignment interval.</p>
+<p>The objective is to prevent a small number of heavily utilized experts from restricting overall throughput.</p>
+<p>There are limits to this approach. Balancing token assignments does not necessarily compensate for every source of hardware variation, such as thermal throttling, network congestion or an underperforming accelerator.</p>
+<p>Those remain broader infrastructure management problems.</p>
+<h2 id="speculative-decoding-and-the-cost-of-generating-answers">Speculative decoding and the cost of generating answers</h2>
+<p>Another optimization involves predicting tokens before the main model has finished processing them.</p>
+<p>Traditional autoregressive decoding generates tokens sequentially. Speculative decoding allows a smaller draft mechanism to propose several tokens, which the larger model verifies.</p>
+<p>DeepInfer incorporates DSpark, which can draft up to five tokens and use confidence estimates to decide how many should be verified.</p>
+<p>The system can avoid spending computational capacity on low-confidence predictions unlikely to be accepted.</p>
+<p>DeepSeek reports that confidence-scheduled verification improves throughput by approximately 4% to 7% around one of its production operating points, with larger improvements under some higher-concurrency conditions.</p>
+<p>Those benefits are workload-dependent. Under lighter loads, the additional scheduling logic can provide little benefit or even introduce overhead.</p>
+<p>The significance lies in the cumulative effect of relatively modest optimizations. At large inference volumes, even a small reduction in wasted computation can influence operating costs.</p>
+<p>DeepInfer also includes an asynchronous scheduler that overlaps CPU-side batch preparation with GPU execution, reducing periods when accelerators would otherwise wait for the host system.</p>
+<p>These are practical engineering improvements that contribute to utilization without requiring additional model training.</p>
+<h2 id="the-less-visible-advantage-keeping-ai-conversations-in-memory">The less visible advantage: keeping AI conversations in memory</h2>
+<p>One of the more interesting disclosures concerns the infrastructure used to retain model context between requests.</p>
+<p>When a model processes a prompt, it creates intermediate attention representations called the key-value cache, or KV cache.</p>
+<p>Reusing compatible cached state can avoid processing the same input again when a conversation continues.</p>
+<p>At scale, repeated prompt processing can consume substantial computing capacity, particularly in coding assistants and agentic workflows that continually reuse long histories.</p>
+<p>DeepSeek&rsquo;s production architecture places a high priority on preserving cache state.</p>
+<p>Its documentation describes a dedicated distributed storage system built on 3FS, with approximately 100 PiB of SSD capacity. The architecture uses erasure coding for resilience and high-throughput NVMe storage servers.</p>
+<p>The published retention policy distinguishes between workloads: approximately three days for agent traffic and seven days for chatbot traffic.</p>
+<p>These are KV-cache retention periods, not necessarily retention limits for raw prompts, conversation transcripts or account records.</p>
+<p>The system also uses different storage tiers. Active cache resides in GPU memory, sliding-window attention state can reside in host memory, and paged block KV cache is stored in the distributed storage environment.</p>
+<p>For sliding-window attention, DeepInfer provides bounded replay. Instead of reconstructing every intermediate state from the beginning of a long conversation, it can replay a limited recent portion of the context. The documented default for V4.1 is 140 tokens.</p>
+<p>This mechanism trades some exactness in reconstructed state for a predictable amount of recomputation.</p>
+<p>The wider KV-cache design is a major part of DeepSeek&rsquo;s production architecture, but the full distributed cache service is not included in the open-source release.</p>
+<h3 id="the-privacy-implications-of-persistent-cache-storage">The privacy implications of persistent cache storage</h3>
+<p>Longer cache retention improves efficiency, but it introduces additional requirements for data governance.</p>
+<p>KV-cache representations are not ordinary text transcripts. They are intermediate numerical states generated during model execution. That distinction should not lead organizations to assume they are inherently free of sensitive information.</p>
+<p>Their information content, potential recoverability and exposure risks depend on the model and implementation.</p>
+<p>An enterprise assessment should establish how cached states are separated between users and tenants, which administrators or services can access them, and how expired or deleted data is handled.</p>
+<p>Retention policies also need to align with contractual requirements, internal data classifications and applicable privacy legislation.</p>
+<p>There is a separate issue of deployment responsibility.</p>
+<p>Using DeepSeek&rsquo;s hosted API involves evaluating the provider&rsquo;s data-processing terms, retention practices, security commitments and relevant jurisdictions.</p>
+<p>Running the model within enterprise-controlled infrastructure changes that relationship. It can provide greater control over where data is processed and stored, but it also makes the organization responsible for securing the inference environment and implementing appropriate governance controls.</p>
+<p>The fact that a model can be self-hosted does not automatically make the deployment compliant with privacy requirements.</p>
+<p>For organizations handling sensitive customer information, source code, employee records or regulated data, cache architecture should be included in both the security assessment and privacy impact analysis.</p>
+<h2 id="what-the-rust-tokenizer-does-and-what-it-cannot-do">What the Rust tokenizer does, and what it cannot do</h2>
+<p>DeepSeek released an updated version of <code>deepseek-recipe</code> alongside DeepInfer.</p>
+<p>The Rust-based package handles protocol conversion, prompt rendering, tokenization and response parsing.</p>
+<p>Its <a href="https://github.com/deepseek-ai/deepseek-recipe/blob/main/CHANGELOG.md">October 20 changelog</a> describes new handling for explicit special tokens.</p>
+<p>These tokens are used to represent structural elements in the model&rsquo;s conversation format, including message boundaries and role information.</p>
+<p>An attacker may attempt to insert text that resembles a privileged structural delimiter and cause a parser to interpret ordinary user input as something more authoritative.</p>
+<p>The updated implementation records which byte ranges represent legitimate special tokens. Similar token spellings appearing in ordinary message content are generally encoded as text rather than promoted into structural control tokens, subject to the documented exceptions.</p>
+<p>This is a useful safeguard against a specific class of protocol manipulation.</p>
+<p>It does not establish protection against semantic prompt injection.</p>
+<p>An attacker can still place malicious instructions in a retrieved document, website, repository file or tool response. Those instructions may attempt to redirect the model, expose confidential information or induce unauthorized actions without using any special-token syntax.</p>
+<p>The relevant security boundary is the distinction between trusted instructions and untrusted content.</p>
+<p>An enterprise AI system must enforce that distinction through application design and authorization controls. A tokenizer cannot independently determine whether an instruction embedded in a document should be followed.</p>
+<p>Likewise, Rust&rsquo;s memory-safety characteristics should not be confused with protection against malicious model behaviour. Memory safety addresses important classes of software vulnerabilities, but it does not solve authorization failures or instruction-level attacks.</p>
+<p>Organizations deploying DeepInfer should also assess the security of its dependencies, model artifacts, orchestration environment, credentials and runtime permissions.</p>
+<p>The release provides useful engineering components. It is not a substitute for a secure AI application architecture.</p>
+<h2 id="why-huawei-support-matters">Why Huawei support matters</h2>
+<p>DeepInfer supports Nvidia SM100 accelerators and Huawei Ascend 950 processors, using separate build environments for CUDA 13 and CANN 9.2.</p>
+<p>That makes hardware compatibility one of the release&rsquo;s more interesting strategic details.</p>
+<p>The public repository includes a supported build path for Huawei hardware, demonstrating DeepSeek&rsquo;s intention to maintain an inference framework across different accelerator ecosystems.</p>
+<p>However, the repository&rsquo;s published performance measurements are based on Nvidia hardware. Comparable Huawei results are not provided.</p>
+<p>It would therefore be premature to conclude that the two platforms offer equivalent production performance or operating economics.</p>
+<p>The inclusion of Huawei nevertheless has strategic significance.</p>
+<p>Advanced AI infrastructure remains heavily dependent on a limited set of semiconductor suppliers and software ecosystems. U.S. export restrictions have increased the importance of domestic alternatives for Chinese AI developers.</p>
+<p>DeepSeek&rsquo;s support for Ascend suggests continued investment in software portability and hardware diversification.</p>
+<p>For enterprise architects, portability should be assessed beyond a successful build. Kernel performance, networking, observability, reliability, developer support and long-term maintenance all influence whether an alternative platform is operationally viable.</p>
+<p>A second supported accelerator ecosystem improves the range of possible deployment choices, but it does not eliminate supply-chain or geopolitical risk.</p>
+<h2 id="can-enterprises-reproduce-deepseeks-economics">Can enterprises reproduce DeepSeek&rsquo;s economics?</h2>
+<p>The answer remains uncertain.</p>
+<p>DeepInfer provides an opportunity to inspect and test important components of DeepSeek&rsquo;s inference implementation. Engineers can evaluate its kernels, scheduling mechanisms and parallelism strategies against their own workloads.</p>
+<p>It does not provide all the infrastructure required to replicate DeepSeek&rsquo;s hosted service.</p>
+<p>The public repository excludes important production components, including distributed KV-cache storage and the request-routing systems that coordinate prefill and decode resources.</p>
+<p>DeepSeek&rsquo;s deployment documentation also describes demanding infrastructure requirements. Its recommended efficient deployment configuration begins with approximately 64 GPUs for prefill and another 64 for decode, supported by substantial storage and networking capacity.</p>
+<p>That is not a typical enterprise proof-of-concept environment.</p>
+<p>For most organizations, the decision will involve comparing a managed API, an established inference platform and a customized self-hosted deployment.</p>
+<p>The relevant financial measure is the total cost of completing the intended workload at an acceptable level of performance, quality, security and reliability.</p>
+<p>A low nominal cost per token is attractive. It may not translate into lower business costs if the model requires additional iterations, produces more errors or imposes significant operational overhead.</p>
+<p>Similarly, self-hosting can offer benefits in control and customization while introducing substantial infrastructure and engineering obligations.</p>
+<p>A rigorous evaluation should use representative production workloads and account for the full cost of the operating environment.</p>
+<h2 id="what-this-means-for-the-ai-market">What this means for the AI market</h2>
+<p>DeepSeek&rsquo;s disclosures put additional attention on an area of AI economics that receives less public discussion than model training: the efficiency of inference after a model has been developed.</p>
+<p>Training creates a model&rsquo;s capabilities. Inference determines how economically those capabilities can be delivered repeatedly to customers.</p>
+<p>The DeepInfer release documents several ways to reduce inference costs through model design, memory management, distributed execution and scheduling.</p>
+<p>It also illustrates why comparing AI providers on GPU counts or published API prices alone can be misleading.</p>
+<p>Different architectures produce different hardware requirements. Caching changes how much computation a request consumes. Workload characteristics influence throughput, latency and utilization.</p>
+<p>The resulting economics are specific to the complete production system.</p>
+<p>DeepSeek has made a meaningful contribution by publishing implementation details and explaining how its production architecture is organized.</p>
+<p>The financial disclosures are interesting, but they remain company-reported figures rather than independently audited profitability data.</p>
+<p>The more durable finding is technical. DeepSeek has shown how a combination of model architecture and carefully engineered infrastructure can improve the efficiency of serving very large AI models.</p>
+<p>For organizations evaluating AI infrastructure, that deserves attention. It is also a reminder that impressive benchmark figures need to be examined alongside the systems, assumptions and operating conditions that produced them.</p>
+<h2 id="sources-and-further-reading">Sources and further reading</h2>
+<h3 id="deepseek-primary-sources">DeepSeek primary sources</h3>
+<ol>
+<li><a href="https://github.com/deepseek-ai/DeepInfer">DeepInfer: Official GitHub repository</a>. Released October 20, 2026. Source code, supported hardware, kernel implementation and benchmark instructions.</li>
+<li><a href="https://github.com/deepseek-ai/DeepInfer/blob/main/doc/inference_deployment_qa.md">DeepSeek V4.1 Flash Inference Deployment Q&amp;A</a>. Production architecture, caching, load balancing, throughput and revenue disclosures.</li>
+<li><a href="https://deepseek.com/en/news/deepseek-v4-1-flash/">Introducing DeepSeek-V4.1-Flash</a>. September 10, 2026. Official model announcement and architectural specifications.</li>
+<li><a href="https://github.com/deepseek-ai/deepseek-recipe">deepseek-recipe repository</a>. API protocol conversion, tokenization and prompt handling.</li>
+<li><a href="https://github.com/deepseek-ai/deepseek-recipe/blob/main/CHANGELOG.md">deepseek-recipe changelog</a>. Version 0.2.0 changes released October 20, 2026.</li>
+</ol>
+<h3 id="independent-technical-analysis">Independent technical analysis</h3>
+<ol start="6">
+<li><a href="https://jarvislabs.ai/blog/deepinfer-deepseek-inference-engine">DeepInfer: What DeepSeek Open-Sourced, and What It Kept</a>. Vishnu Subramanian, Jarvislabs, October 21, 2026.</li>
+<li><a href="https://rits.shanghai.nyu.edu/ai/deepseek-open-sources-deepinfer-its-production-inference-engine/">DeepSeek Open-Sources DeepInfer, Its Production Inference Engine</a>. NYU Shanghai Research and Instructional Technology Services, October 21, 2026.</li>
+<li><a href="https://deepinfer.net/">DeepInfer: DeepSeek&rsquo;s V4.1-Flash Inference Framework</a>. Independent technical field guide, October 2026.</li>
+</ol>
+<h2 id="research-transparency">Research transparency</h2>
+<p>AI tools assisted with research, source review, technical comparison, drafting and editing. The analysis draws on publicly available technical documentation and independent reporting.</p>
+<p>Performance, infrastructure and revenue figures attributed to DeepSeek are based on its published disclosures. I did not independently benchmark the software, validate production telemetry or audit the company&rsquo;s financial results.</p>
+<p>The technical and business assessments are my own. References to companies, products and technologies do not constitute endorsements.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>The views expressed are personal and do not represent those of my employer or its affiliates.</p>
+<p>This article is provided for informational purposes and does not constitute professional security, privacy, legal, financial or architectural advice. Organizations should conduct their own assessments before deploying the technologies discussed.</p>
+<img src="uploads/2026/c76eb3b83c.png">
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/10/20/beyond-smarter-models-gemini-argon.html">Beyond Smarter Models: Gemini 4 Argon, Hermes Agent and the Power of Multi-Agent AI</a></h1>
 		
 
@@ -589,7 +771,7 @@
 <p>Cloud services, software frameworks, runtime behaviour and security controls change over time. Architectural and security characteristics also depend on implementation, configuration, dependencies, data flows and operating environment. Anyone considering these technologies should evaluate them against their own technical, security, privacy and regulatory requirements.</p>
 <h2 id="keywords">Keywords</h2>
 <p>#AI #ArtificialIntelligence #AICoding #AIAssistedDevelopment #SoftwareDevelopment #Cloudflare #CloudflareWorkers #Vinext #Vite #NextJS #React #EdgeComputing #Serverless #ServerlessComputing #CloudComputing #CloudArchitecture #EdgeArchitecture #DistributedComputing #WebDevelopment #WebArchitecture #V8 #PerformanceEngineering #UserExperience #Cybersecurity #CloudSecurity #ApplicationSecurity #SecureByDesign #Privacy #PrivacyByDesign #DataPrivacy #TechnologyStrategy #EnterpriseArchitecture #CISO #TechnologyLeadership #ResponsibleAI #AIGovernance #DigitalTransformation #BagCheck</p>
-<img src="https://cdn.uploads.micro.blog/255457/2026/edge-computing-takes-flight.png">
+<img src="uploads/2026/edge-computing-takes-flight.png">
 
 		</div>
 	  </div>
