@@ -24,6 +24,98 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://kiledjian.com/2026/11/24/113502.html">Z.ai&#39;s GLM-5.4: Loop Transformers, Generalized Coding and the Limits of Early Evidence</a></h1>
+		
+
+		<a href="https://kiledjian.com/2026/11/24/113502.html" class="u-url"><time class="dt-published" datetime="2026-11-24 11:35:02 -0500">Nov 24, 2026</time></a>
+
+		<div class="e-content">
+			 <p>On Nov. 23, 2026, Z.ai, the international brand of Chinese AI developer Zhipu AI, released GLM-5.4, its first flagship model built on a Loop Transformer architecture. Adapted from the company&rsquo;s 750-billion-parameter mixture-of-experts GLM-5 base model, GLM-5.4 adds multimodal vision inputs, supports a 1-million-token context window and targets what Z.ai calls &ldquo;Generalized Coding.&rdquo; The company has not disclosed how many parameters are active per token.</p>
+<p>Z.ai claims the looped design allows GLM-5.4 to reach intelligence levels comparable to 2- to 3-trillion-parameter models without adding parameter count. For organizations evaluating AI, the release raises a practical architectural question: can repeating layers internally deliver frontier reasoning at lower serving costs, or does it simply shift the bottleneck from parameter size to runtime and token consumption?</p>
+<p>Early evidence suggests the architecture has merit, but significant gaps in published benchmarks, pricing and operational speed make it difficult to draw firm conclusions today.</p>
+<h2 id="what-zai-released">What Z.ai released</h2>
+<p>In a standard Transformer, each neural network layer executes once per forward pass. In a Loop Transformer, a shared block of layers runs multiple times, refining its internal representations on each pass. Rather than pre-training a looped model from scratch — an approach Z.ai notes still lags conventional models under identical compute budgets — the company adapted its pre-trained GLM-5 base model through continued training, looping 28 layers for two iterations.</p>
+<p>The concept is not new. Researchers proposed weight-shared depth in the 2018 Universal Transformer, and Thinking Machines Lab shipped a looped architecture in its Inkling 2 Mini model a week earlier. Z.ai&rsquo;s contribution is scaling the approach to a 750-billion-parameter mixture-of-experts model.</p>
+<p>To keep serving costs manageable at that scale, Z.ai introduced three modifications:</p>
+<ul>
+<li><strong>Gated progressive updates:</strong> Per-token gates regulate how much each iteration updates the residual stream, preventing activation values from destabilizing across loops. Z.ai reports that the first pass builds global context conservatively while the second pass writes full refinements.</li>
+<li><strong>Hybrid key-value cache:</strong> Instead of duplicating the full key-value cache for the second loop, the model reuses sparse cache entries from the first pass and maintains a separate cache only within a local sliding window.</li>
+<li><strong>Sparse attention index reuse:</strong> The second pass reuses the attention indices calculated during the first pass, avoiding additional indexing overhead.</li>
+</ul>
+<p>According to Z.ai&rsquo;s developer documentation, GLM-5.4 accepts text, image, video and file inputs and produces up to 128,000 output tokens. Its predecessor, GLM-5.3, was text-only. Z.ai reports inference speeds of up to 200 tokens per second off-peak and 70 to 80 tokens per second at peak load.</p>
+<p>The company frames the release around Generalized Coding — using code as an intermediate layer for non-software tasks such as generating a self-narrated music video, scripting a six-axis robotic arm in FreeCAD, building a playable game and rendering 3D scenes with custom shaders.</p>
+<h2 id="what-the-early-evidence-shows">What the early evidence shows</h2>
+<p>Assessing GLM-5.4 is complicated by what Z.ai did not publish. As of Nov. 24, 2026, the company had released no model card, no standard coding or vision benchmark table and no methodology supporting its claim of 2- to 3-trillion-parameter equivalence. A win-rate chart included in launch materials lacked an explanation of its evaluation setup. Established third-party evaluators such as Artificial Analysis have not yet scored the model.</p>
+<p>Z.ai&rsquo;s primary controlled evidence comes from a separate 30-billion-parameter test model sharing the same base architecture. With roughly 10 per cent more total training compute than a non-looped baseline of the same size, the looped model recorded its largest gains in mathematics, scientific reasoning and long-context tasks. Average output length fell by 10 to 14 per cent across benchmarks such as GPQA-Diamond and MMLU-Pro, suggesting some reasoning shifted from explicit output tokens into the internal loop. Those measurements, however, apply to the 30-billion-parameter test model after supervised fine-tuning rather than GLM-5.4 itself.</p>
+<p>Independent testing remains sparse. In early evaluations on AICodeKing&rsquo;s KingBench 4 coding suite, GLM-5.4 placed seventh overall and first among open-track models at maximum reasoning effort. However, the operational trade-off was pronounced.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>GLM-5.4 (max effort)</th>
+<th>Gemini 4 Neon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wall-clock runtime</td>
+<td>431 min.</td>
+<td>109 min.</td>
+</tr>
+<tr>
+<td>Reasoning steps</td>
+<td>1,128</td>
+<td>244</td>
+</tr>
+<tr>
+<td>Total tokens consumed</td>
+<td>approx. 1.04 million</td>
+<td>approx. 70,000</td>
+</tr>
+</tbody>
+</table>
+<p><em>Source: AICodeKing KingBench 4 evaluation, Nov. 23, 2026. Figures reflect a single reviewer&rsquo;s test harness; reasoning effort settings for Gemini 4 Neon were not specified, and reproducibility has been disputed in developer discussions.</em></p>
+<p>In the same evaluation, GLM-5.4 recorded a 1.56 per cent tool-call failure rate — 11th among 17 models — but recovered 66 per cent of failed calls through retries.</p>
+<p>The contrast between Z.ai&rsquo;s 30-billion-parameter test results and GLM-5.4&rsquo;s KingBench 4 behaviour highlights an important gap. While internal looping shortened outputs under controlled 30-billion-parameter testing, the full 750-billion-parameter model suffers from a limitation Z.ai acknowledged in its own announcement: it tends to get caught in overly long &ldquo;marathon thinking&rdquo; loops. Prolonged self-correction can improve accuracy, but it creates substantial latency and token overhead.</p>
+<p>Early community reactions on X and Reddit reflect that split. Some developers reported strong performance in code review, bug hunting and offensive security testing, including a black-box lab test in which the model chained together a multistep remote code execution exploit. Others criticized its latency, verbose internal deliberations and gap behind Anthropic&rsquo;s Claude Opus 5.5 on routine software engineering. Because these observations come from the first 24 hours after release, they should be treated as preliminary rather than reproducible evaluations.</p>
+<h2 id="pricing-availability-and-enterprise-economics">Pricing, availability and enterprise economics</h2>
+<p>GLM-5.4 is currently available through Z.ai Chat, ZCode and the subscription-based GLM Coding Plan. Z.ai states that weekly usage quotas for GLM-5.4 are 1.5 times those of GLM-5.3. That figure requires context: if GLM-5.4 consumes up to 15 times more tokens on complex tasks, a 50 per cent quota increase represents a net reduction in effective capacity.</p>
+<p>Pay-as-you-go API access is listed as coming soon pending a security assessment, and Z.ai has not published per-token pricing for GLM-5.4. Organizations should not assume that GLM-5.3&rsquo;s published API rates — US$1.40 per million input tokens, US$0.26 for cached input and US$4.40 for output — will carry over unchanged.</p>
+<p>Similarly, while Z.ai has committed to releasing open weights after completing &ldquo;safety hardening,&rdquo; it has provided no release date and no licence terms. Describing GLM-5.4 as the leading open model is therefore premature for organizations that require self-hosted deployment or permissive commercial licensing.</p>
+<p>From an operational perspective, GLM-5.4 illustrates why token generation speed is an incomplete metric. Generating 80 to 200 tokens per second matters little if a model consumes 15 times more tokens than a competitor to finish the same task. Once API pricing is announced, total cost per verified task — not headline per-token rates — will determine whether the model is economical. Teams testing it today also need to configure reasoning effort explicitly; Z.ai&rsquo;s documentation indicates that leaving effort unset defaults to maximum, increasing the risk of timeouts and excessive token spend.</p>
+<h2 id="security-privacy-and-governance-considerations">Security, privacy and governance considerations</h2>
+<p>From a CISO perspective, GLM-5.4 raises four practical considerations.</p>
+<p><strong>Data protection and jurisdiction.</strong> Z.ai is the international brand of Beijing-based Zhipu AI. Organizations subject to strict data-residency, privacy or supply-chain mandates must assess where prompts, code and files are processed, whether subscription tiers such as Z.ai Chat, ZCode and the GLM Coding Plan retain or train on customer inputs, and whether zero-data-retention terms are available. Provider nationality alone does not establish technical insecurity, but procurement decisions require verified contractual and architectural evidence rather than assumptions.</p>
+<p><strong>Dual-use cybersecurity capabilities and release readiness.</strong> Z.ai explicitly lists cybersecurity alongside software engineering as a target domain for ultra-long-chain reasoning, continuing a focus introduced with GLM-5.3 in August 2026. Early reports of the model surfacing security flaws missed by other models — and executing multistep exploit chains in lab testing — underscore its dual-use potential. Z.ai&rsquo;s decision to withhold general API access and open weights pending security assessment and safety hardening points to one of two realities: either the model exhibits dual-use cyber behaviour that Z.ai has not yet contained, or the company shipped the announcement before completing standard red-teaming. Either warrants caution.</p>
+<p><strong>Agentic execution and tool controls.</strong> Pairing vision, file handling and persistent retry behaviour with shell or repository access expands the attack surface for prompt injection, unintended file modification and unsafe command execution. A model&rsquo;s internal caution is not a security boundary. Production workflows require sandboxed execution environments, least-privilege tool permissions and independent verification gates.</p>
+<p><strong>Self-hosting and licensing realities.</strong> Even after open weights are released, &ldquo;open weights&rdquo; do not automatically carry permissive commercial licences. Furthermore, operating a 750-billion-parameter model — regardless of its active parameter count — demands substantial GPU infrastructure, supply-chain verification and ongoing maintenance. Open weights expand deployment options, but they do not eliminate legal or operational complexity.</p>
+<h2 id="what-the-results-tell-us">What the results tell us</h2>
+<p>GLM-5.4 is an interesting architectural bet. Demonstrating that an existing frontier-scale base model can be converted into a Loop Transformer without pre-training from scratch points to a potential alternative to endlessly scaling parameter counts.</p>
+<p>At this stage, however, it remains a scaling technique rather than a verified performance milestone. Missing official benchmarks, unpublished API pricing, unreleased weights, unclear subscription data-handling terms and marathon thinking loops leave too many operational variables unanswered.</p>
+<p>Based on the limited evidence available today, there is not yet enough data to justify production adoption — even for specialized workflows such as asynchronous code review or security auditing. Organizations interested in GLM-5.4 should wait for independent benchmark results, published API rates and clear security and licensing documentation before committing engineering time to formal evaluation.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>Z.ai — GLM-5.4: Toward Generalized Coding with Our First Loop Transformer, Nov. 23, 2026</li>
+<li>VentureBeat — Z.ai&rsquo;s GLM-5.4 aims to match models up to four times its size by running 28 layers twice, Nov. 23, 2026</li>
+<li>DataCamp — GLM-5.4: Z.ai&rsquo;s First Loop Transformer and the Push Toward Generalized Coding, Nov. 23, 2026</li>
+</ul>
+<h2 id="ethics-and-transparency">Ethics and transparency</h2>
+<p>This article draws on publicly available vendor documentation, technical announcements, published third-party evaluations and industry reporting. Z.ai&rsquo;s internal claims and ablation results are identified separately from independent testing and community observations.</p>
+<p>AI tools assisted with research, source comparison, technical analysis, adversarial review and editorial refinement. No original model testing or independent security assessment was conducted. Final editorial judgment and responsibility for publication remain mine.</p>
+<p>References to products, providers and benchmarks do not constitute endorsements.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>The views expressed are my personal views and do not represent the views, positions or opinions of my employer, its affiliates, leadership, customers, partners or suppliers.</p>
+<p>This article is provided for general informational and educational purposes only. It does not constitute technical, cybersecurity, privacy, legal, regulatory, financial, investment or procurement advice.</p>
+<p>Information reflects publicly available sources reviewed on Nov. 24, 2026. Model specifications, pricing, availability, licensing and benchmark results may change. Performance and security characteristics depend on the deployment environment, configuration and workload.</p>
+<p>Organizations should independently assess technical, operational, security, privacy and contractual requirements before adopting any AI technology.</p>
+<h2 id="keywords">Keywords</h2>
+<p>Z.ai, Zhipu AI, GLM-5.4, GLM-5.3, Loop Transformer, Generalized Coding, artificial intelligence, AI architecture, AI model benchmarks, KingBench 4, enterprise AI, coding agents, cybersecurity, CISO, AI security, AI governance, data privacy, data sovereignty, open-weight models, total cost of ownership, inference efficiency, responsible AI</p>
+<img src="uploads/2026/fgxnldfgxjkldf.jpg">
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://kiledjian.com/2026/11/17/tencent-hy-flash-examining-the.html">Tencent Hy4 Flash: Examining the Cost and Performance Trade-Offs</a></h1>
 		
 
@@ -609,7 +701,7 @@
 <h2 id="disclaimer">Disclaimer</h2>
 <p>The views expressed are personal and do not represent those of my employer or its affiliates.</p>
 <p>This article is provided for informational purposes and does not constitute professional security, privacy, legal, financial or architectural advice. Organizations should conduct their own assessments before deploying the technologies discussed.</p>
-<img src="uploads/2026/c76eb3b83c.png">
+<img src="https://cdn.uploads.micro.blog/255457/2026/c76eb3b83c.png">
 
 		</div>
 	  </div>
